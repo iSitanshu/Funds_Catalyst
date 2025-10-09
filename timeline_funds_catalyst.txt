@@ -1,0 +1,32 @@
+Timeline - FundsCatalyst
+
+by the end of this week - starting from 8th October 2 days left 
+1. finalise the design of the website including home, project, particular project, services
+2. frontend, backend, admin setup - nvm
+3. form for consultancy booking
+4. work on the frontend part - start from the bottom (waiting for the content from the client)
+5. connect with git init and push
+
+by the end of second week - 19th Oct
+1. create the newletter section + send welcome mail on subscribing
+2. work on the admin part - code the layout
+3. node for backend add zod for security
+4. database setup + prisma for ORM + create schema
+5. create login, signup, signout functionality
+6. add, delete blogs functionality
+7. create navbar and figure out the bcg design left -> left -> left
+8. add KPIs for real time data in the frontend
+9. create services, projects, particular projects, consultancy form routes
+10. create contact us, about, our work, login, logout, signup page
+
+by the end of third week - 25th October
+1. finalise the frontend and admin design
+2. add donation + integrate payment gateway + add rasorpay
+3. complete the admin design 
+4. connect frontend with the backend 
+5. connect admin with the backend 
+6. deploy frontend on vercel env changes
+7. deploy backend and database on render env changes 
+8. domain setup
+
+NOTE: As I'm working on the project, I've created a timeline. However, please note that it may be subject to change if any errors or bugs arise that require additional time to resolve.
