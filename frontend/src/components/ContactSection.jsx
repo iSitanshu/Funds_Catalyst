@@ -63,11 +63,11 @@ const ContactSection = () => {
 
             {/* CTA Buttons */}
             <div className="space-y-6 animate-fade-in flex flex-col justify-center">
-              <div className="bg-gradient-to-br from-blue-700 to-green-500 rounded-2xl p-8 text-center space-y-6 shadow-hover">
-                <h3 className="text-2xl font-heading font-bold text-primary-foreground">
+              <div className="bg-yellow-500 rounded-2xl p-8 text-center space-y-6 shadow-hover">
+                <h3 className="text-2xl font-heading text-white font-bold ">
                   Get Started Today
                 </h3>
-                <p className="text-primary-foreground/90">
+                <p className="">
                   Schedule a free consultation to discuss your NGO's needs and discover how we can help you achieve your goals.
                 </p>
                 <div className="space-y-4">

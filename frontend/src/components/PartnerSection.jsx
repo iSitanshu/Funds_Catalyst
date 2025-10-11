@@ -8,6 +8,12 @@ const partnerLogos = [
   "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
   "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
   "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
+  "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
+  "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
+  "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
+  "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
+  "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
+  "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
 ];
 
 const PartnerSection = () => {
@@ -54,13 +60,19 @@ const PartnerSection = () => {
   }, [isInView]);
 
   const positions = [
-    { top: 22, left: 40 },
-    { top: 52, left: 35 },
-    { top: 52, left: 75 },
-    { top: 72, left: 45 },
-    { top: 47, left: 25 },
-    { top: 40, left: 65 },
-    { top: 70, left: 60 },
+    { top: 21, left: 35 },
+    { top: 42, left: 15 },
+    { top: 52, left: 65 },
+    { top: 72, left: 60 },
+    { top: 22, left: 70 },
+    { top: 40, left: 80 },
+    { top: 50, left: 25 },
+    { top: 60, left: 45 },
+    { top: 70, left: 35 },
+    { top: 80, left: 26 },
+    { top: 65, left: 91 },
+    { top: 52, left: 77 },
+    { top: 32, left: 45 },
   ];
 
   return (

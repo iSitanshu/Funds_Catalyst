@@ -5,8 +5,8 @@ import { Menu } from 'lucide-react';
 
 const Navbar = () => {
   return (
-    <div className="flex items-center justify-between border px-6 py-3 shadow-sm bg-white">
-      <div className="flex items-center">
+    <div className="flex items-center justify-between px-6 py-3 shadow-sm bg-primary">
+      <div className="flex items-center text-white">
         {/* <img 
         src="./src/assets/logo_fund_cataylst.png" 
         alt="Company Logo"
@@ -15,7 +15,7 @@ const Navbar = () => {
         Fund Catalyst
       </div>      
       <div>
-        <Menu />
+        <Menu className="text-white" />
       </div>
     </div>
   );
