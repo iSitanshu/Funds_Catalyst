@@ -6,6 +6,9 @@ import ImpactSection from '../components/ImpactSection'
 import FrameworkSection from '../components/FrameworkSection'
 import WhyChooseSection from '../components/WhyChooseSection'
 import ContactSection from '../components/ContactSection'
+import NewsLetterSection from '../components/NewsLetterSection'
+import PartnerSection from '../components/PartnerSection'
+import TestimonialsSection from '../components/TestimonialSection'
 
 const Home = () => {
   return (
@@ -15,8 +18,11 @@ const Home = () => {
       <ServiceSection />
       <ImpactSection />
       <FrameworkSection />
+      <TestimonialsSection />
+      <PartnerSection />
       <WhyChooseSection />
       <ContactSection />
+      <NewsLetterSection />
     </div>
   )
 }

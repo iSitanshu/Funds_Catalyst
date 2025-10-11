@@ -8,8 +8,8 @@ const ContactSection = () => {
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-4xl md:text-5xl font-heading font-bold text-blue-500 mb-4">
-              Ready to Grow Your <span className="text-green-500">NGO or CSR Impact?</span>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">
+              Ready to Grow Your <span className="">NGO or CSR Impact?</span>
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-primary via-secondary to-accent mx-auto mb-6"></div>
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
