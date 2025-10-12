@@ -36,7 +36,7 @@ const LandingPage = () => {
             variant="hero" 
             size="xl"
             // onClick={() => scrollToSection("contact")}
-            className="bg-yellow-400"
+            className="bg-yellow-400 hover:bg-yellow-600 cursor-pointer"
           >
             Get a Free Consultation
             <ArrowRight className="group-hover:translate-x-1 transition-transform" />
@@ -45,6 +45,7 @@ const LandingPage = () => {
           <Button 
             variant="hero-outline" 
             size="xl"
+            className="cursor-pointer"
             // onClick={() => scrollToSection("services")}
           >
             View Our Services

@@ -2,6 +2,8 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import LoginPopup from "./pages/LoginPopup"
+import SignupPopup from "./pages/SignupPopup"
 
 // ✅ Import all pages
 import Home from "./pages/Home";
@@ -18,6 +20,8 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/sign-in" element={<LoginPopup />} />
+          <Route path="/sign-up" element={<SignupPopup />} />
           {/* <Route path="/consultancy-booking" element={<ConsultancyBooking />}/>
 
           <Route path="/services" element={<Services />} />
