@@ -7,6 +7,7 @@ import SignupPopup from "./pages/SignupPopup"
 
 // ✅ Import all pages
 import Home from "./pages/Home";
+import PaymentButton from "./components/PaymentButton";
 // import ConsultancyBooking from "./pages/ConsultancyBooking";
 // import Services from "./pages/Services";
 // import ServiceDetail from "./pages/ServiceDetail";
@@ -22,6 +23,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/sign-in" element={<LoginPopup />} />
           <Route path="/sign-up" element={<SignupPopup />} />
+          <Route path="/donate" element={<PaymentButton />} />
           {/* <Route path="/consultancy-booking" element={<ConsultancyBooking />}/>
 
           <Route path="/services" element={<Services />} />
