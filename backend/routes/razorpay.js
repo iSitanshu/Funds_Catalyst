@@ -1,28 +1,34 @@
 import { Router } from "express"
 import Razorpay from "razorpay"
 import crypto from 'crypto';
+import { paymentSchema } from './../types.js'
 
 const router = Router();
 
 const razorpay = new Razorpay({
-    key_id: process.env.RAZORPAY_ID,
-    key_secret: process.env.RAZORPAY_SECRET_KEY
+  key_id: process.env.RAZORPAY_ID,
+  key_secret: process.env.RAZORPAY_SECRET_KEY
 })
 
-
 router.post('/create-order', async (req, res) => {
-    try {
-        const options = {
-            amount: req.body.amount * 100, // Amount in paisa
-            currency: 'INR',
-            receipt: 'receipt_' + Math.random().toString(36).substring(7),
-        };
-        const order = await razorpay.orders.create(options);
-        res.status(200).json(order);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: err.message });
+  try {
+    const { success, data } = paymentSchema.safeParse(req.body);
+    if (!success) {
+      return res.status(411).send("Invalid Input");
     }
+    
+    const options = {
+        amount: req.body.amount, // Amount in paisa
+        currency: 'INR',
+        receipt: 'receipt_' + Math.random().toString(36).substring(7),
+    };
+    const order = await razorpay.orders.create(options);
+
+    res.status(200).json(order);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: err.message });
+  }
 });
 
 
@@ -33,8 +39,8 @@ router.post('/verify-payment', async (req, res) => {
 
     const sign = razorpay_order_id + '|' + razorpay_payment_id;
     const expectedSign = crypto.createHmac('sha256', 'YOUR_RAZORPAY_KEY_SECRET')
-                            .update(sign.toString())
-                            .digest('hex');
+      .update(sign.toString())
+      .digest('hex');
 
     if (razorpay_signature === expectedSign) {
       // Payment is verified

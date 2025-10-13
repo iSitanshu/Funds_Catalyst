@@ -15,14 +15,14 @@ const Home = () => {
     <div className="min-h-screen">
       <LandingPage />
       <IntroSection />
-      <ServiceSection />
+      {/* <ServiceSection /> */}
       <ImpactSection />
-      <FrameworkSection />
+      {/* <FrameworkSection />
       <TestimonialsSection />
       <PartnerSection />
       <WhyChooseSection />
       <ContactSection />
-      <NewsLetterSection />
+      <NewsLetterSection /> */}
     </div>
   )
 }
