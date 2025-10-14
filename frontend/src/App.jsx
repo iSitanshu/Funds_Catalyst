@@ -7,8 +7,10 @@ import SignupPopup from "./pages/SignupPopup"
 
 // ✅ Import all pages
 import Home from "./pages/Home";
-import PaymentButton from "./components/PaymentButton";
-// import ConsultancyBooking from "./pages/ConsultancyBooking";
+// import PaymentButton from "./components/PaymentButton";
+import DonationPage from "./pages/DonatePage";
+import DonationSuccessfull from "./pages/DonationSuccessfull";
+import ConsultancyBooking from "./pages/ConsultancyBooking";
 // import Services from "./pages/Services";
 // import ServiceDetail from "./pages/ServiceDetail";
 // import Projects from "./pages/Projects";
@@ -23,9 +25,11 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/sign-in" element={<LoginPopup />} />
           <Route path="/sign-up" element={<SignupPopup />} />
-          <Route path="/donate" element={<PaymentButton />} />
-          {/* <Route path="/consultancy-booking" element={<ConsultancyBooking />}/>
-
+          <Route path="/api/donate" element={<DonationPage />} />
+          <Route path="/api/donation-success" element={<DonationSuccessfull />} />
+          
+          <Route path="/api/consultancy-booking" element={<ConsultancyBooking />}/>
+{/* 
           <Route path="/services" element={<Services />} />
           <Route path="/services/:serviceSlug" element={<ServiceDetail />} />
 

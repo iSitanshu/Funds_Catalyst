@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import { ArrowRight } from "lucide-react";
 
@@ -5,6 +6,7 @@ const LandingPage = () => {
 //   const scrollToSection = (id: string) => {
 //     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 //   };
+const navigate = useNavigate()
 
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
@@ -37,6 +39,7 @@ const LandingPage = () => {
             size="xl"
             // onClick={() => scrollToSection("contact")}
             className="bg-yellow-400 hover:bg-yellow-600 cursor-pointer"
+            onClick={() => navigate('/api/consultancy-booking')}
           >
             Get a Free Consultation
             <ArrowRight className="group-hover:translate-x-1 transition-transform" />

@@ -10,13 +10,10 @@ const Navbar = () => {
     <div className="flex items-center justify-between px-6 py-1 shadow-sm bg-primary">
       
       {/* Logo or Brand */}
-      <div className="flex items-center text-white font-bold text-lg tracking-wide">
-        {/* You can uncomment and use a logo if needed */}
-        {/* <img 
-          src="./src/assets/logo_fund_cataylst.png" 
-          alt="Company Logo"
-          className="w-20 h-auto mr-2"
-        /> */}
+      <div 
+        className="flex items-center text-white font-bold text-lg tracking-wide cursor-pointer"
+        onClick={() => navigate('/')}
+      >
         Fund Catalyst
       </div>      
 
@@ -26,7 +23,7 @@ const Navbar = () => {
         {/* Donate Button */}
         <button
           className="flex items-center gap-2 bg-white text-primary font-semibold px-4 py-2 rounded-full cursor-pointer shadow-md hover:bg-pink-100 transition-all duration-300"
-          onClick={() => navigate('/donate')}
+          onClick={() => navigate('/api/donate')}
         >
           <Heart className="text-red-500" size={18} />
           Donate
