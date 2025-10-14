@@ -17,7 +17,6 @@ export const paymentSchema = z.object({
         required_error: "Amount is required",
         invalid_type_error: "Amount must be a number",
     })
-    .int("Amount must be a whole number.") // Ensures no decimals
-    .gt(1, "Amount must be greater than 1.")   // Must be greater than 1
-    .lt(10, "Amount must be less than 10."), // Must be less than 10
+    .gte(1, "Amount must be at least 1.") // Minimum amount
+    .lte(100000, "Amount must be less than or equal to 1,00,000.") // Maximum amount
 });
