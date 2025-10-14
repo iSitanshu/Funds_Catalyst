@@ -2,6 +2,7 @@ import { Router } from "express"
 import Razorpay from "razorpay"
 import crypto from 'crypto';
 import { paymentSchema } from './../types.js'
+import { sendDonationEmail } from "./email.js";
 
 const router = Router();
 
@@ -40,20 +41,27 @@ router.post('/create-order', async (req, res) => {
 // using the razorpay order, we move forward
 router.post('/verify-payment', async (req, res) => {
   try {
-    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
+    const { razorpay_order_id, razorpay_payment_id, razorpay_signature, donorInfo } = req.body;
 
     // Input validation
-    if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
+    if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature || !donorInfo) {
         return res.status(400).json({ error: 'Missing required payment verification fields.' });
     }
 
     const sign = razorpay_order_id + '|' + razorpay_payment_id;
-    const expectedSign = crypto.createHmac('sha256', razorpay_verification)
+    const expectedSign = crypto
+      .createHmac('sha256', razorpay_verification)
       .update(sign.toString())
       .digest('hex');
 
     if (razorpay_signature === expectedSign) {
       // Payment is verified
+      await sendDonationEmail(
+      donorInfo.email,
+      donorInfo.name,
+      donorInfo.amount, // The amount should be in paisa
+      razorpay_payment_id
+    );
       res.status(200).json({ message: 'Payment verified successfully' });
     } else {
       res.status(400).json({ error: 'Invalid payment signature' });
