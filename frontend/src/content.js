@@ -118,59 +118,60 @@ const capabilities = [
 const services = [
   {
     icon: Building2,
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVNAW5cjPxATQVnsLei5aSdNhCnl84tzm6CA&s",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVNAW5cjPxATQVnsLei5aSdNhCnl84tzm6CA&s",
     title: "NGO Registration & Compliance",
-    description:
-      "Seamless registration under Section 8, Trust, Society with ongoing compliance support and expert guidance throughout the process.",
+    description: "Seamless registration under Section 8, Trust, Society with ongoing compliance support and expert guidance throughout the process.",
+    largeDescription: "We provide end-to-end assistance in NGO formation under Section 8 Companies, Trusts, and Societies. Our experts help you understand the legal structures, prepare documentation, and file for registration. Post-registration, we ensure continued compliance with government regulations such as 12A, 80G, and FCRA to maintain your credibility and enable tax exemptions for donors.",
+    keyword: "ngo-registration-&-compliance"
   },
   {
     icon: Handshake,
-    image:
-      "https://www.soundnlight.in/wp-content/uploads/2016/04/Anand_Mahindra_CSR_SLSV.jpg",
+    image: "https://www.soundnlight.in/wp-content/uploads/2016/04/Anand_Mahindra_CSR_SLSV.jpg",
     title: "CSR Consultancy",
-    description:
-      "Strategic CSR planning, fund facilitation, and impact measurement for corporates to maximize their social impact and reputation.",
+    description: "Strategic CSR planning, fund facilitation, and impact measurement for corporates to maximize their social impact and reputation.",
+    largeDescription: "Our CSR consulting services empower companies to design and execute impactful CSR initiatives. We identify the right NGO partners, align projects with CSR mandates under Companies Act 2013, manage fund disbursement, and provide monitoring & evaluation frameworks to measure and report impact effectively.",
+    keyword: "csr-consultancy"
   },
   {
     icon: FileText,
-    image:
-      "https://media.gettyimages.com/id/583762158/photo/mumbai-politics-and-governance.jpg?s=1024x1024&w=gi&k=20&c=bTphIkkX02PIw5k626TrniyCkjs8cwQQAoDnQ3VHWfA=",
+    image: "https://media.gettyimages.com/id/583762158/photo/mumbai-politics-and-governance.jpg?s=1024x1024&w=gi&k=20&c=bTphIkkX02PIw5k626TrniyCkjs8cwQQAoDnQ3VHWfA=",
     title: "Government Tender Support",
-    description:
-      "Comprehensive tender identification, DPR writing, and bid management services for government projects to increase winning chances.",
+    description: "Comprehensive tender identification, DPR writing, and bid management services for government projects to increase winning chances.",
+    largeDescription: "We specialize in helping organizations navigate the complex world of government tenders. From identifying suitable tenders, drafting winning Detailed Project Reports (DPRs), to managing the bidding process—we improve your chances of securing high-value public sector contracts through expert consultancy and documentation.",
+    keyword: "government-tender-support"
   },
   {
     icon: TrendingUp,
-    image:
-      "https://give.do/blog/wp-content/uploads/2023/11/How-popular-is-fundraising-in-India-becoming.jpg",
+    image: "https://give.do/blog/wp-content/uploads/2023/11/How-popular-is-fundraising-in-India-becoming.jpg",
     title: "Fundraising Strategy",
-    description:
-      "Diversified funding strategies connecting you with CSR, government, and private donors to secure sustainable financial support.",
+    description: "Diversified funding strategies connecting you with CSR, government, and private donors to secure sustainable financial support.",
+    largeDescription: "Our team crafts customized fundraising strategies tailored to your mission. We map donor landscapes, write compelling grant proposals, establish donor engagement plans, and help you diversify funding through CSR partnerships, crowdfunding, and institutional grants to build long-term sustainability.",
+    keyword: "fundraising-strategy"
   },
   {
     icon: Users,
     image: "https://space-india.com/wp-content/uploads/2023/12/image.jpg",
     title: "Project Execution",
-    description:
-      "End-to-end project management ensuring on-time, quality delivery across 20 states with expertise in handling complex projects.",
+    description: "End-to-end project management ensuring on-time, quality delivery across 20 states with expertise in handling complex projects.",
+    largeDescription: "We provide professional project execution support including mobilization, field deployment, quality control, and reporting. Leveraging local networks and experienced teams, we ensure your initiatives—across sectors like health, education, and livelihood—are implemented efficiently and create measurable impact on ground.",
+    keyword: "project-execution"
   },
   {
     icon: Target,
-    image:
-      "https://neuroject.com/wp-content/uploads/2025/02/Top-5-Megaprojects-in-India-Engineering-Marvels-You-Must-See-02-Neuroject-800x450.jpg",
+    image: "https://neuroject.com/wp-content/uploads/2025/02/Top-5-Megaprojects-in-India-Engineering-Marvels-You-Must-See-02-Neuroject-800x450.jpg",
     title: "Impact Assessment",
-    description:
-      "Data-driven impact measurement and reporting to showcase your social outcomes and demonstrate the effectiveness of your initiatives.",
+    description: "Data-driven impact measurement and reporting to showcase your social outcomes and demonstrate the effectiveness of your initiatives.",
+    largeDescription: "Our impact assessments utilize mixed-method evaluations combining qualitative and quantitative data. We design KPIs, conduct baseline & endline studies, and produce reports that validate your project’s effectiveness—helping you communicate outcomes transparently to stakeholders and funders.",
+    keyword: "impact-assessment"
   },
   {
     icon: Shield,
-    image:
-      "https://synergyindia.foundation/wp-content/uploads/2023/08/government-schemes-for-girl-child-education-in-India.jpg",
+    image: "https://synergyindia.foundation/wp-content/uploads/2023/08/government-schemes-for-girl-child-education-in-India.jpg",
     title: "Legal & Regulatory Guidance",
-    description:
-      "Expert navigation of FCRA, 12A, 80G, and other critical compliance requirements to ensure legal and regulatory adherence.",
-  },
+    description: "Expert navigation of FCRA, 12A, 80G, and other critical compliance requirements to ensure legal and regulatory adherence.",
+    largeDescription: "Stay compliant with evolving legal frameworks governing NGOs and CSR activities. We assist with registration under FCRA, 12A, 80G, PAN/TAN, as well as periodic filings and audits. Our legal experts ensure you avoid penalties and maintain eligibility for domestic and foreign funding.",
+    keyword: "legal-&-regulatory-guidance"
+  }
 ];
 
 const project = [
@@ -178,40 +179,51 @@ const project = [
     icon: Building2,
     image: "https://sc0.blr1.digitaloceanspaces.com/large/657281-e3b445bb-90b4-46e3-ae48-69716adff81a.jpg",
     title: "Project Management Consulting",
-    description: "Comprehensive project planning, execution, and monitoring to ensure your projects are delivered on time, within scope, and on budget. Our consultants apply proven frameworks like Agile, PRINCE2, and PMBOK."
+    description: "Comprehensive project planning, execution, and monitoring to ensure your projects are delivered on time, within scope, and on budget. Our consultants apply proven frameworks like Agile, PRINCE2, and PMBOK.",
+    largeDescription: "We offer end-to-end project management consulting using globally accepted methodologies like PMBOK, Agile, and PRINCE2. Our services include project scoping, scheduling, risk management, resource planning, stakeholder coordination, and monitoring & evaluation. We ensure transparency, accountability, and performance across every project stage.",
+    keyword: "project-management-consulting"
   },
   {
     icon: Building2,
     image: "https://media.gettyimages.com/id/1198193345/photo/proud-indian-ceo-posing-with-smiling-company-staff-in-office.jpg?s=612x612&w=gi&k=20&c=FW3PnsR_r2oU_0XsXnwj0Q8v9Yjk49NChXgWL5DMruc=",
     title: "CRF Funding Assistance",
-    description: "Expert guidance in applying for Central Road Fund (CRF) financing. We help you prepare proposals, ensure compliance with government norms, and streamline the disbursement process."
+    description: "Expert guidance in applying for Central Road Fund (CRF) financing. We help you prepare proposals, ensure compliance with government norms, and streamline the disbursement process.",
+    largeDescription: "We support infrastructure development organizations in accessing Central Road Fund (CRF) financing. From feasibility reports and proposal preparation to regulatory compliance and follow-up with ministries, our team ensures smooth navigation of CRF guidelines, boosting your project's chances of approval and timely fund release.",
+    keyword: "crf-funding-assistance"
   },
   {
     icon: Building2,
     image: "https://agiindia.com/wp-content/uploads/2020/09/Top-Five-Infrastructure-Projects-in-India.png",
     title: "Government Tender Consulting",
-    description: "Stay ahead in the competitive bidding process. Our team identifies relevant tenders, prepares accurate documentation, and improves your success rate in securing government projects."
+    description: "Stay ahead in the competitive bidding process. Our team identifies relevant tenders, prepares accurate documentation, and improves your success rate in securing government projects.",
+    largeDescription: "Maximize your chances in public procurement with our expert tender consulting. We analyze tender opportunities, prepare essential technical and financial documents, coordinate site visits, and assist during pre-bid meetings. With a high win rate across infrastructure and social sector tenders, we are your trusted partner for public contracts.",
+    keyword: "government-tender-consulting"
   },
   {
     icon: Building2,
     image: "https://via.placeholder.com/100x100?text=NGO",
     title: "NGO & Non-Profit Advisory",
-    description: "Supporting NGOs with strategy, funding applications, and regulatory compliance. We help build sustainable models that attract donors and drive long-term social impact."
+    description: "Supporting NGOs with strategy, funding applications, and regulatory compliance. We help build sustainable models that attract donors and drive long-term social impact.",
+    largeDescription: "From mission clarity and governance structuring to fundraising and donor communications, we offer holistic advisory services to NGOs. Our team helps set up operational frameworks, align activities with SDGs, and build transparent processes that enhance donor confidence and drive measurable change.",
+    keyword: "ngo-&-non-profit-advisory"
   },
   {
     icon: Building2,
     image: "https://via.placeholder.com/100x100?text=Strategy",
     title: "Strategic Planning & Feasibility",
-    description: "From feasibility studies to strategic roadmaps, our consultancy helps organizations assess risks, explore opportunities, and define measurable goals to fuel growth and resilience."
+    description: "From feasibility studies to strategic roadmaps, our consultancy helps organizations assess risks, explore opportunities, and define measurable goals to fuel growth and resilience.",
+    largeDescription: "We conduct in-depth feasibility assessments that examine technical, financial, and social viability of your initiatives. Our strategic planning team helps you build practical roadmaps, define KPIs, allocate resources effectively, and make data-informed decisions to scale with confidence and impact.",
+    keyword: "strategic-planning-&-feasibility"
   },
   {
     icon: Building2,
     image: "https://via.placeholder.com/100x100?text=Training",
     title: "Capacity Building & Training",
-    description: "Tailored training programs for teams in project management, compliance, and operations. Equip your staff with the right tools and methodologies for efficient execution."
+    description: "Tailored training programs for teams in project management, compliance, and operations. Equip your staff with the right tools and methodologies for efficient execution.",
+    largeDescription: "We design and deliver customized capacity-building programs across domains like monitoring & evaluation, CSR compliance, field operations, and communication. Our modules are interactive, practical, and led by experienced trainers to upskill your team and strengthen your organizational capacity.",
+    keyword: "capacity-building-&-training"
   }
 ];
-
 
 const impactStats = [
   {

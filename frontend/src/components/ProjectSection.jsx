@@ -46,6 +46,7 @@ const ProjectSection = () => {
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
                 className="relative overflow-hidden group cursor-pointer h-70"
+                onClick={() => navigate(`/api/project/${service.uuid()}`)}
               >
                 {/* Image */}
                 <div className="relative w-full h-full">
