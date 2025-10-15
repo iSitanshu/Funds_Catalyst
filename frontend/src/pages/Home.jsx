@@ -9,6 +9,7 @@ import ContactSection from '../components/ContactSection'
 import NewsLetterSection from '../components/NewsLetterSection'
 import PartnerSection from '../components/PartnerSection'
 import TestimonialsSection from '../components/TestimonialSection'
+import ProjectSection from "../components/ProjectSection"
 
 const Home = () => {
   return (
@@ -17,6 +18,7 @@ const Home = () => {
       <IntroSection />
       <ServiceSection />
       <ImpactSection />
+      <ProjectSection />
       <FrameworkSection />
       <TestimonialsSection />
       <PartnerSection />

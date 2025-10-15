@@ -173,6 +173,46 @@ const services = [
   },
 ];
 
+const project = [
+  {
+    icon: Building2,
+    image: "https://via.placeholder.com/100x100?text=PM",
+    title: "Project Management Consulting",
+    description: "Comprehensive project planning, execution, and monitoring to ensure your projects are delivered on time, within scope, and on budget. Our consultants apply proven frameworks like Agile, PRINCE2, and PMBOK."
+  },
+  {
+    icon: Building2,
+    image: "https://via.placeholder.com/100x100?text=CRF",
+    title: "CRF Funding Assistance",
+    description: "Expert guidance in applying for Central Road Fund (CRF) financing. We help you prepare proposals, ensure compliance with government norms, and streamline the disbursement process."
+  },
+  {
+    icon: Building2,
+    image: "https://via.placeholder.com/100x100?text=Tenders",
+    title: "Government Tender Consulting",
+    description: "Stay ahead in the competitive bidding process. Our team identifies relevant tenders, prepares accurate documentation, and improves your success rate in securing government projects."
+  },
+  {
+    icon: Building2,
+    image: "https://via.placeholder.com/100x100?text=NGO",
+    title: "NGO & Non-Profit Advisory",
+    description: "Supporting NGOs with strategy, funding applications, and regulatory compliance. We help build sustainable models that attract donors and drive long-term social impact."
+  },
+  {
+    icon: Building2,
+    image: "https://via.placeholder.com/100x100?text=Strategy",
+    title: "Strategic Planning & Feasibility",
+    description: "From feasibility studies to strategic roadmaps, our consultancy helps organizations assess risks, explore opportunities, and define measurable goals to fuel growth and resilience."
+  },
+  {
+    icon: Building2,
+    image: "https://via.placeholder.com/100x100?text=Training",
+    title: "Capacity Building & Training",
+    description: "Tailored training programs for teams in project management, compliance, and operations. Equip your staff with the right tools and methodologies for efficient execution."
+  }
+];
+
+
 const impactStats = [
   {
     icon: CheckCircle2,
@@ -229,4 +269,4 @@ const impactData = [
   { amount: "₹5,000", text: "Building supplies for 1 school room" },
 ];
 
-export { steps, capabilities, services, impactStats, impactData, statsData };
+export { steps, capabilities, services, impactStats, impactData, statsData, project };
