@@ -26,7 +26,7 @@ const ProjectSection = () => {
         {/* View All Button - Left aligned */}
         <div className="flex justify-end mb-6">
           <button
-            onClick={() => navigate("/api/all-projects")}
+            onClick={() => navigate("/api/projects")}
             className="flex items-center gap-2 text-yellow-600 font-semibold hover:text-yellow-800 transition duration-300 cursor-pointer group"
           >
             View All
@@ -46,7 +46,7 @@ const ProjectSection = () => {
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
                 className="relative overflow-hidden group cursor-pointer h-70"
-                onClick={() => navigate(`/api/project/${service.uuid()}`)}
+                onClick={() => navigate(`/api/project/${service.keyword}`)}
               >
                 {/* Image */}
                 <div className="relative w-full h-full">

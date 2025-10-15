@@ -34,7 +34,7 @@ function App() {
 
           {/* <Route path="/services/:serviceSlug" element={<RenderDetail />} /> */}
 
-          <Route path="/api/all-projects" element={<ViewallProject />} />
+          <Route path="/api/projects" element={<ViewallProject />} />
           <Route path="/projects/:projectId" element={<RenderDetail />} />
 
         </Routes>

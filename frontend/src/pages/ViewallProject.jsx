@@ -30,6 +30,7 @@ const ViewallProject = () => {
             <Card
               key={idx}
               className="border border-gray-200 bg-white transition-all duration-200 hover:shadow-xl cursor-pointer"
+              onClick={() => navigate(`/api/project/${proj.keyword}`)}
             >
               <div className="h-52 w-full overflow-hidden">
                 <img
