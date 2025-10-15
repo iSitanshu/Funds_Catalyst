@@ -176,19 +176,19 @@ const services = [
 const project = [
   {
     icon: Building2,
-    image: "https://via.placeholder.com/100x100?text=PM",
+    image: "https://sc0.blr1.digitaloceanspaces.com/large/657281-e3b445bb-90b4-46e3-ae48-69716adff81a.jpg",
     title: "Project Management Consulting",
     description: "Comprehensive project planning, execution, and monitoring to ensure your projects are delivered on time, within scope, and on budget. Our consultants apply proven frameworks like Agile, PRINCE2, and PMBOK."
   },
   {
     icon: Building2,
-    image: "https://via.placeholder.com/100x100?text=CRF",
+    image: "https://media.gettyimages.com/id/1198193345/photo/proud-indian-ceo-posing-with-smiling-company-staff-in-office.jpg?s=612x612&w=gi&k=20&c=FW3PnsR_r2oU_0XsXnwj0Q8v9Yjk49NChXgWL5DMruc=",
     title: "CRF Funding Assistance",
     description: "Expert guidance in applying for Central Road Fund (CRF) financing. We help you prepare proposals, ensure compliance with government norms, and streamline the disbursement process."
   },
   {
     icon: Building2,
-    image: "https://via.placeholder.com/100x100?text=Tenders",
+    image: "https://agiindia.com/wp-content/uploads/2020/09/Top-Five-Infrastructure-Projects-in-India.png",
     title: "Government Tender Consulting",
     description: "Stay ahead in the competitive bidding process. Our team identifies relevant tenders, prepares accurate documentation, and improves your success rate in securing government projects."
   },

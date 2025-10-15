@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import DonationPage from "./pages/DonatePage";
 import DonationSuccessfull from "./pages/DonationSuccessfull";
 import ConsultancyBooking from "./pages/ConsultancyBooking";
+import ViewallProject from "./pages/ViewallProject";
 // import Services from "./pages/Services";
 // import ServiceDetail from "./pages/ServiceDetail";
 // import Projects from "./pages/Projects";
@@ -29,12 +30,11 @@ function App() {
           <Route path="/api/donation-success" element={<DonationSuccessfull />} />
           
           <Route path="/api/consultancy-booking" element={<ConsultancyBooking />}/>
-{/* 
-          <Route path="/services" element={<Services />} />
-          <Route path="/services/:serviceSlug" element={<ServiceDetail />} />
 
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/projects/:projectId" element={<ProjectDetail />} /> */}
+          {/* <Route path="/services/:serviceSlug" element={<ServiceDetail />} /> */}
+
+          <Route path="/api/all-projects" element={<ViewallProject />} />
+          {/* <Route path="/projects/:projectId" element={<ProjectDetail />} /> */}
 
         </Routes>
       </main>
