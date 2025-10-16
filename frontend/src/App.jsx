@@ -26,9 +26,9 @@ function App() {
   return (
     <div className="app-container">
       <Navbar />
+      <ScrollToTop /> 
       <main>
         <Routes>
-          <ScrollToTop /> 
           <Route path="/" element={<Home />} />
           <Route path="/sign-in" element={<LoginPopup />} />
           <Route path="/sign-up" element={<SignupPopup />} />

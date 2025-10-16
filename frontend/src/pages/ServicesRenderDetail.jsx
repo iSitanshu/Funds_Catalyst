@@ -1,84 +1,117 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { Card, CardContent } from "../components/ui/card";
-import { Separator } from "../components/ui/separator";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
 import { services } from "../content";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Home } from "lucide-react";
 
 const ServicesRenderDetail = () => {
   const { serviceId } = useParams();
   const navigate = useNavigate();
 
   const data = services.find((item) => item.keyword === serviceId);
-  if (!data) return <h1 className="text-center text-red-500">services not found</h1>;
+  if (!data)
+    return <h1 className="text-center text-red-500 mt-20">Service not found</h1>;
 
-  // Get up to 3 related articles excluding current
   const relatedArticles = services
     .filter((item) => item.keyword !== serviceId)
     .slice(0, 3);
 
+  // ✅ Helper function to navigate to / and scroll to #services
+  const goToServicesSection = () => {
+    navigate("/#services");
+    // Wait for route change, then smooth-scroll
+    setTimeout(() => {
+      const element = document.querySelector("#services");
+      if (element) element.scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  };
+
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8 space-y-10">
-      {/* services Detail */}
-      <Card className="overflow-hidden">
-        <CardContent className="p-0">
-          <div className="flex justify-center bg-gray-100">
+    <div className="max-w-6xl mx-auto px-4 py-10 space-y-12">
+      {/* Breadcrumb */}
+      <div className="flex items-center text-sm text-muted-foreground gap-2">
+        <Home
+          className="w-4 h-4 cursor-pointer hover:text-yellow-500"
+          onClick={() => navigate("/")}
+        />
+        <span>/</span>
+        <span
+          className="cursor-pointer hover:text-yellow-500"
+          onClick={goToServicesSection}
+        >
+          Services
+        </span>
+        <span>/</span>
+        <span className="text-foreground font-medium">{data.title}</span>
+      </div>
+
+      {/* Service Detail Section */}
+      <Card className="border-none shadow-sm">
+        <CardHeader className="pb-0">
+          <CardTitle className="text-3xl font-bold tracking-tight text-gray-900">
+            {data.title}
+          </CardTitle>
+          <p className="text-muted-foreground text-lg mt-2">{data.description}</p>
+        </CardHeader>
+
+        <CardContent className="mt-6 space-y-8">
+          <div className="rounded-lg overflow-hidden bg-gray-100 aspect-[16/9]">
             <img
               src={data.image}
               alt={data.title}
-              className="object-contain max-w-full h-auto rounded-t-md"
+              className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
             />
           </div>
+
+          <Separator />
+
+          <p className="text-base leading-relaxed text-gray-700 whitespace-pre-line">
+            {data.largeDescription}
+          </p>
         </CardContent>
       </Card>
 
-      <div className="space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight">{data.title}</h1>
-        <p className="text-muted-foreground text-lg">{data.description}</p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam provident aut laudantium. Perferendis accusantium quis ratione deleniti eum eaque dolores non, natus corporis inventore dignissimos animi harum at, cum incidunt id recusandae porro placeat, odio quos! Autem, veritatis iste praesentium error voluptatum omnis ut asperiores cumque sed sapiente repudiandae at magnam eum quibusdam unde facere hic reprehenderit ducimus expedita beatae. Necessitatibus similique modi at quae, dolor reiciendis laudantium minima et, asperiores enim vel atque sapiente ipsa pariatur? Doloribus minima illum, rem repellat consequuntur ab maiores molestiae, laborum quasi architecto obcaecati distinctio incidunt explicabo fugiat optio veritatis, nesciunt mollitia facilis quidem.
-      </div>
-
-      <Separator />
-
-      <p className="text-base leading-relaxed text-gray-700">{data.largeDescription}</p>
-
-      {/* Related servicess Section */}
+      {/* Related Services */}
       {relatedArticles.length > 0 && (
-        <div className="mt-12 space-y-6">
+        <div className="mt-14 space-y-6">
           <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-semibold">More servicess You May Like</h2>
-          </div>
-
-          {/* View All Button - Right aligned */}
-          <div className="flex justify-end mb-6">
-            <button
-              onClick={() => navigate("/api/servicess")}
-              className="flex items-center gap-2 text-yellow-600 font-semibold hover:text-yellow-800 transition duration-300 cursor-pointer group"
+            <h2 className="text-2xl font-semibold text-gray-900">
+              More Services You May Like
+            </h2>
+            <Button
+              variant="link"
+              onClick={goToServicesSection}
+              className="text-yellow-600 hover:text-yellow-700 flex items-center gap-2"
             >
               View All
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-            </button>
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </Button>
           </div>
 
-          {/* Static 3 Related Articles */}
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
             {relatedArticles.map((item) => (
-              <div
+              <Card
                 key={item.keyword}
-                className="cursor-pointer group rounded-lg overflow-hidden shadow hover:shadow-md transition-shadow duration-300"
                 onClick={() => navigate(`/servicess/${item.keyword}`)}
+                className="cursor-pointer group border border-gray-200 hover:border-yellow-400 hover:shadow-lg transition-all duration-300"
               >
-                <div className="w-full h-48 overflow-hidden">
+                <div className="overflow-hidden rounded-t-lg">
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
-                <div className="p-4 bg-white">
-                  <h3 className="text-lg font-semibold">{item.title}</h3>
-                  <p className="text-sm text-gray-500 mt-1 line-clamp-2">{item.description}</p>
-                </div>
-              </div>
+                <CardContent className="p-4 bg-white">
+                  <h3 className="text-lg font-semibold text-gray-900 group-hover:text-yellow-600 transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
+                    {item.description}
+                  </p>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
