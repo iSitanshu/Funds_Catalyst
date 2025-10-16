@@ -1,8 +1,10 @@
 import { Icon } from "lucide-react";
 import React, { useState } from "react";
 import { services } from "../content";
+import { useNavigate } from "react-router-dom";
 
 const ServiceSection = () => {
+  const navigate = useNavigate();
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
@@ -29,6 +31,7 @@ const ServiceSection = () => {
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
                 className="relative overflow-hidden group cursor-pointer h-70"
+                onClick={() => navigate(`/api/services/${service.keyword}`)}
               >
                 {/* Image with grayscale filter */}
                 <div className="relative w-full h-full">

@@ -19,6 +19,7 @@ import TermsandCondition from "./pages/TermsandCondtition"
 import RefundAndCancellation from "./pages/RefundAndCancellation";
 import PolicyPrivacy from "./pages/PolicyPrivacy"
 import ContactUs from "./pages/ContactInfo";
+import ServicesRenderDetail from "./pages/ServicesRenderDetail";
 
 function App() {
   return (
@@ -42,7 +43,7 @@ function App() {
 
           <Route path="/api/projects" element={<ViewallProject />} />
           <Route path="/api/projects/:projectId" element={<RenderDetail />} />
-          {/* <Route path="/services/:serviceSlug" element={<RenderDetail />} /> */}
+          <Route path="/api/services/:serviceId" element={<ServicesRenderDetail />} />
         </Routes>
       </main>
       <Footer />
