@@ -60,7 +60,7 @@ const Footer = () => {
               </li>
               <li>
                 <button
-                // onClick={() => scrollToSection("contact")} 
+                onClick={() => navigate("/api/contact-us")} 
                 className="text-primary-foreground/80 hover:text-accent transition-colors">
                   Contact Us
                 </button>

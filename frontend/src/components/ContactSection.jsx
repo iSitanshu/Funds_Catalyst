@@ -65,7 +65,7 @@ const ContactSection = () => {
 
             {/* CTA Buttons */}
             <div className="space-y-6 animate-fade-in flex flex-col justify-center">
-              <div className="bg-green-500 rounded-2xl p-8 text-center space-y-6 shadow-hover">
+              <div className="bg-yellow-500 rounded-2xl p-8 text-center space-y-6 shadow-hover">
                 <h3 className="text-2xl font-heading text-white font-bold ">
                   Get Started Today
                 </h3>

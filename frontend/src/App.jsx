@@ -18,6 +18,7 @@ import AboutUs from "./pages/AboutUs";
 import TermsandCondition from "./pages/TermsandCondtition"
 import RefundAndCancellation from "./pages/RefundAndCancellation";
 import PolicyPrivacy from "./pages/PolicyPrivacy"
+import ContactUs from "./pages/ContactInfo";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/sign-in" element={<LoginPopup />} />
           <Route path="/sign-up" element={<SignupPopup />} />
           <Route path="/api/about-us" element={<AboutUs />} />
+          <Route path="/api/contact-us" element={<ContactUs />} />
           <Route path="/api/terms-and-conditions" element={<TermsandCondition />} />
           <Route path="/api/privacy-policy" element={<PolicyPrivacy />} />
           <Route path="/api/refund-policy" element={<RefundAndCancellation />} />
