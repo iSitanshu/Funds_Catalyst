@@ -20,6 +20,7 @@ import RefundAndCancellation from "./pages/RefundAndCancellation";
 import PolicyPrivacy from "./pages/PolicyPrivacy"
 import ContactUs from "./pages/ContactInfo";
 import ServicesRenderDetail from "./pages/ServicesRenderDetail";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
       <Navbar />
       <main>
         <Routes>
+          <ScrollToTop /> 
           <Route path="/" element={<Home />} />
           <Route path="/sign-in" element={<LoginPopup />} />
           <Route path="/sign-up" element={<SignupPopup />} />
