@@ -13,6 +13,7 @@ import DonationSuccessfull from "./pages/DonationSuccessfull";
 import ConsultancyBooking from "./pages/ConsultancyBooking";
 import ViewallProject from "./pages/ViewallProject";
 import RenderDetail from "./pages/RenderDetail"
+import AboutUs from "./pages/AboutUs";
 // import Services from "./pages/Services";
 // import ServiceDetail from "./pages/ServiceDetail";
 // import Projects from "./pages/Projects";
@@ -27,6 +28,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/sign-in" element={<LoginPopup />} />
           <Route path="/sign-up" element={<SignupPopup />} />
+          <Route path="/api/about-us" element={<AboutUs />} />
           <Route path="/api/donate" element={<DonationPage />} />
           <Route path="/api/donation-success" element={<DonationSuccessfull />} />
           
@@ -35,7 +37,7 @@ function App() {
           {/* <Route path="/services/:serviceSlug" element={<RenderDetail />} /> */}
 
           <Route path="/api/projects" element={<ViewallProject />} />
-          <Route path="/projects/:projectId" element={<RenderDetail />} />
+          <Route path="/api/projects/:projectId" element={<RenderDetail />} />
 
         </Routes>
       </main>

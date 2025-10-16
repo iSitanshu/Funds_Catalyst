@@ -37,7 +37,7 @@ const Footer = () => {
             <ul className="space-y-3">
               <li>
                 <button
-                // onClick={() => scrollToSection("about")} 
+                onClick={() => navigate("/api/about-us")} 
                 className="text-primary-foreground/80 hover:text-accent transition-colors">
                   About Us
                 </button>

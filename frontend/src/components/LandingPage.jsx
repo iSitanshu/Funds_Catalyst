@@ -3,9 +3,9 @@ import { Button } from "./ui/button";
 import { ArrowRight } from "lucide-react";
 
 const LandingPage = () => {
-//   const scrollToSection = (id: string) => {
-//     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-//   };
+  const scrollToSection = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
 const navigate = useNavigate()
 
   return (
@@ -49,7 +49,7 @@ const navigate = useNavigate()
             variant="hero-outline" 
             size="xl"
             className="cursor-pointer"
-            // onClick={() => scrollToSection("services")}
+            onClick={() => scrollToSection("services")}
           >
             View Our Services
           </Button>
@@ -58,15 +58,15 @@ const navigate = useNavigate()
         {/* Trust Indicators */}
         <div className="mt-16 flex flex-wrap justify-center gap-8 md:gap-12 text-primary-foreground">
           <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold text-accent">abc+</div>
+            <div className="text-3xl md:text-4xl font-bold text-accent">8+</div>
             <div className="text-sm md:text-base opacity-90">Years Expertise</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold text-accent">abc+</div>
+            <div className="text-3xl md:text-4xl font-bold text-accent">1000+</div>
             <div className="text-sm md:text-base opacity-90">Professionals</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold text-accent">abc</div>
+            <div className="text-3xl md:text-4xl font-bold text-accent">25</div>
             <div className="text-sm md:text-base opacity-90">States Served</div>
           </div>
         </div>

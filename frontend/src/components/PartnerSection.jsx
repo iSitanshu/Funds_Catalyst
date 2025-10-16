@@ -67,7 +67,7 @@ const PartnerSection = () => {
     { top: 22, left: 70 },
     { top: 40, left: 80 },
     { top: 50, left: 25 },
-    { top: 60, left: 45 },
+    { top: 77, left: 45 },
     { top: 70, left: 35 },
     { top: 80, left: 26 },
     { top: 65, left: 91 },

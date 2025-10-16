@@ -1,7 +1,9 @@
 import { Phone, Mail, MapPin, MessageCircle } from "lucide-react";
 import { Button } from "./ui/button";
+import { useNavigate } from "react-router-dom";
 
 const ContactSection = () => {
+  const navigate = useNavigate();
   return (
     <section id="contact" className="py-20 bg-gray-100">
       <div className="container mx-auto px-4">
@@ -63,7 +65,7 @@ const ContactSection = () => {
 
             {/* CTA Buttons */}
             <div className="space-y-6 animate-fade-in flex flex-col justify-center">
-              <div className="bg-yellow-500 rounded-2xl p-8 text-center space-y-6 shadow-hover">
+              <div className="bg-green-500 rounded-2xl p-8 text-center space-y-6 shadow-hover">
                 <h3 className="text-2xl font-heading text-white font-bold ">
                   Get Started Today
                 </h3>
@@ -75,6 +77,7 @@ const ContactSection = () => {
                     variant="hero" 
                     size="lg" 
                     className="w-full bg-primary-foreground text-blue-900 hover:bg-primary-foreground/90"
+                    onClick={() => navigate('/api/consultancy-booking')}
                   >
                     <Phone className="w-5 h-5" />
                     Request a Callback
