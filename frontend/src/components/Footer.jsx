@@ -1,6 +1,8 @@
 import { Phone, Mail, MapPin, MessageCircle, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const navigate = useNavigate();
   // const scrollToSection = (id: string) => {
   //   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   // };

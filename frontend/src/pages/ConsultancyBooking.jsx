@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "../components/ui/button";
 import { Phone, Mail } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const ConsultancyBooking = () => {
   const [form, setForm] = useState({
@@ -12,6 +13,7 @@ const ConsultancyBooking = () => {
     requirement: "",
     message: "",
   });
+  const navigate = useNavigate();
 
   const [errors, setErrors] = useState({});
 
@@ -173,7 +175,24 @@ const ConsultancyBooking = () => {
               {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
             </div>
 
-            {/* Submit Button */}
+            {/* Terms and Conditions */}
+            <div className="flex items-start gap-2 text-gray-600 text-sm">
+              <label className="flex items-start gap-2 cursor-pointer">
+                <input type="checkbox" required className="mt-1" />
+                <span>
+                  By continuing, I agree to the&nbsp;
+                  <a
+                    href="/api/terms-and-conditions"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline hover:text-red-300"
+                  >
+                    terms of use & privacy policy
+                  </a>
+                  .
+                </span>
+              </label>
+            </div>
             <div className="md:col-span-2 flex justify-center mt-4">
               <Button
                 type="submit"
@@ -213,6 +232,8 @@ const ConsultancyBooking = () => {
           <p className="text-sm opacity-90">
             Our experts are available Monday to Friday, 10 AM – 6 PM IST.
           </p>
+
+          
         </div>
       </section>
 

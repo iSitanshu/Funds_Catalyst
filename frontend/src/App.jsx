@@ -14,10 +14,10 @@ import ConsultancyBooking from "./pages/ConsultancyBooking";
 import ViewallProject from "./pages/ViewallProject";
 import RenderDetail from "./pages/RenderDetail"
 import AboutUs from "./pages/AboutUs";
-// import Services from "./pages/Services";
-// import ServiceDetail from "./pages/ServiceDetail";
-// import Projects from "./pages/Projects";
-// import ProjectDetail from "./pages/ProjectDetail";
+
+import TermsandCondition from "./pages/TermsandCondtition"
+import RefundAndCancellation from "./pages/RefundAndCancellation";
+import PolicyPrivacy from "./pages/PolicyPrivacy"
 
 function App() {
   return (
@@ -29,16 +29,18 @@ function App() {
           <Route path="/sign-in" element={<LoginPopup />} />
           <Route path="/sign-up" element={<SignupPopup />} />
           <Route path="/api/about-us" element={<AboutUs />} />
+          <Route path="/api/terms-and-conditions" element={<TermsandCondition />} />
+          <Route path="/api/privacy-policy" element={<PolicyPrivacy />} />
+          <Route path="/api/refund-policy" element={<RefundAndCancellation />} />
           <Route path="/api/donate" element={<DonationPage />} />
           <Route path="/api/donation-success" element={<DonationSuccessfull />} />
-          
-          <Route path="/api/consultancy-booking" element={<ConsultancyBooking />}/>
 
-          {/* <Route path="/services/:serviceSlug" element={<RenderDetail />} /> */}
+          <Route path="/api/consultancy-booking" element={<ConsultancyBooking />} />
+
 
           <Route path="/api/projects" element={<ViewallProject />} />
           <Route path="/api/projects/:projectId" element={<RenderDetail />} />
-
+          {/* <Route path="/services/:serviceSlug" element={<RenderDetail />} /> */}
         </Routes>
       </main>
       <Footer />
