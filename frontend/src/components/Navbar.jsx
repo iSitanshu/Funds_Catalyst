@@ -15,9 +15,10 @@ const Navbar = () => {
         
         {/* Logo or Brand */}
         <div 
-          className="flex items-center text-primary-foreground font-bold text-xl tracking-wide cursor-pointer hover:scale-105 transition-transform duration-300"
+          className="flex items-center text-primary-foreground gap-6 font-bold text-xl tracking-wide cursor-pointer hover:scale-105 transition-transform duration-300"
           onClick={() => navigate('/')}
         >
+          <img src="./src/assets/fundslogo.jpg" alt="" width={40} height={10}/>
           Fund Catalyst
         </div>      
 

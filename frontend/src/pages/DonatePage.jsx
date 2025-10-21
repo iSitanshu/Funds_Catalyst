@@ -111,7 +111,7 @@ export default function DonationPage() {
               <br />
               at a Time
             </h1>
-            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-xl text-white mb-8 max-w-2xl mx-auto leading-relaxed">
               Join us in supporting life-changing initiatives that provide education, healthcare,
               and dignity to underprivileged communities across India.
             </p>

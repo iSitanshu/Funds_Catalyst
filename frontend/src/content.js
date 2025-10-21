@@ -151,7 +151,7 @@ const services = [
   {
     icon: Users,
     image: "https://space-india.com/wp-content/uploads/2023/12/image.jpg",
-    title: "Project Execution",
+    title: "Project Execution and Management",
     description: "End-to-end project management ensuring on-time, quality delivery across 20 states with expertise in handling complex projects.",
     largeDescription: "We provide professional project execution support including mobilization, field deployment, quality control, and reporting. Leveraging local networks and experienced teams, we ensure your initiatives—across sectors like health, education, and livelihood—are implemented efficiently and create measurable impact on ground.",
     keyword: "project-execution"
