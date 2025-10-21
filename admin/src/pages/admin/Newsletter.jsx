@@ -20,7 +20,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+} from "../../components/ui/alert-dialog";
 import { toast } from "sonner";
 
 const mockSubscribers = [
@@ -34,7 +34,7 @@ const mockSubscribers = [
 export function Newsletter() {
   const [subscribers, setSubscribers] = useState(mockSubscribers);
   const [searchQuery, setSearchQuery] = useState("");
-  const [deleteId, setDeleteId] = useState<number | null>(null);
+  const [deleteId, setDeleteId] = useState(null);
 
   const filteredSubscribers = subscribers.filter(
     (sub) =>

@@ -2,11 +2,11 @@ import { useState } from "react";
 import { Sidebar } from "../components/admin/Sidebar"
 import { Header } from "../components/admin/Header"
 import {Dashboard} from "./admin/Dashboard";
-import Newsletter from "./admin/Newsletter";
-import BlogManagement from "./admin/BlogManagement";
-import SendMail from "./admin/SendMail";
-import Consultancy from "./admin/Consultancy";
-import Settings from "./admin/Settings";
+import {Newsletter} from "./admin/Newsletter";
+import {BlogManagement} from "./admin/BlogManagement";
+import {SendMail} from "./admin/SendMail";
+import {Consultancy} from "./admin/Consultancy";
+import {Settings} from "./admin/Settings";
 
 const Admin = () => {
   const [currentPage, setCurrentPage] = useState("dashboard");
