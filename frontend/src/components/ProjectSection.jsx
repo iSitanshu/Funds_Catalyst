@@ -10,7 +10,7 @@ const ProjectSection = () => {
   const visibleProjects = project.slice(0, 3);
 
   return (
-    <section id="services" className="py-26 bg-white">
+    <section id="projects" className="py-26 bg-white">
       <div className="container mx-auto px-4">
         {/* Section Title */}
         <div className="text-center mb-4">

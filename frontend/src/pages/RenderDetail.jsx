@@ -2,7 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Card, CardContent } from "../components/ui/card";
 import { Separator } from "../components/ui/separator";
 import { project } from "../content";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Home } from "lucide-react";
 
 const RenderDetail = () => {
   const { projectId } = useParams();
@@ -16,8 +16,34 @@ const RenderDetail = () => {
     .filter((item) => item.keyword !== projectId)
     .slice(0, 3);
 
+  // ✅ Helper function to navigate to / and scroll to #services
+  const goToProjectSection = () => {
+    navigate("/#projects");
+    // Wait for route change, then smooth-scroll
+    setTimeout(() => {
+      const element = document.querySelector("#projects");
+      if (element) element.scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  };
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-8 space-y-10">
+      {/* Breadcrumb */}
+      <div className="flex items-center text-sm text-muted-foreground gap-2">
+        <Home
+          className="w-4 h-4 cursor-pointer hover:text-yellow-500"
+          onClick={() => navigate("/")}
+        />
+        <span>/</span>
+        <span
+          className="cursor-pointer hover:text-yellow-500"
+          onClick={goToProjectSection}
+        >
+          Projects
+        </span>
+        <span>/</span>
+        <span className="text-foreground font-medium">{data.title}</span>
+      </div>
       {/* Project Detail */}
       <Card className="overflow-hidden">
         <CardContent className="p-0">
@@ -65,7 +91,7 @@ const RenderDetail = () => {
               <div
                 key={item.keyword}
                 className="cursor-pointer group rounded-lg overflow-hidden shadow hover:shadow-md transition-shadow duration-300"
-                onClick={() => navigate(`/projects/${item.keyword}`)}
+                onClick={() => navigate(`/api/projects/${item.keyword}`)}
               >
                 <div className="w-full h-48 overflow-hidden">
                   <img

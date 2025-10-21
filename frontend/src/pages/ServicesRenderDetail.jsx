@@ -43,7 +43,7 @@ const ServicesRenderDetail = () => {
           Services
         </span>
         <span>/</span>
-        <span className="text-foreground font-medium">{data.title}</span>
+      <span className="text-foreground font-medium">{data.title}</span>
       </div>
 
       {/* Service Detail Section */}
