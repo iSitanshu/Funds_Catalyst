@@ -43,13 +43,6 @@ export function Dashboard() {
           description="Pending requests"
           trend={{ value: "+5 new", isPositive: true }}
         />
-        <StatsCard
-          title="Engagement Rate"
-          value="68%"
-          icon={TrendingUp}
-          description="Email open rate"
-          trend={{ value: "+8% improvement", isPositive: true }}
-        />
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
