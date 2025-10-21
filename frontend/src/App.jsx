@@ -21,6 +21,7 @@ import PolicyPrivacy from "./pages/PolicyPrivacy"
 import ContactUs from "./pages/ContactInfo";
 import ServicesRenderDetail from "./pages/ServicesRenderDetail";
 import ScrollToTop from "./components/ScrollToTop";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
           <Route path="/api/projects" element={<ViewallProject />} />
           <Route path="/api/projects/:projectId" element={<RenderDetail />} />
           <Route path="/api/services/:serviceId" element={<ServicesRenderDetail />} />
+           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />
