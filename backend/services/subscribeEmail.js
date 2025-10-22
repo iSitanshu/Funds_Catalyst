@@ -19,7 +19,7 @@ transporter.verify((error) => {
 
 export const sendNewsletterWelcomeEmail = async (subscriberEmail) => {
   const mailOptions = {
-    from: `"Funds Catalyst NGO" <${process.env.EMAIL_USER}>`,
+    from: `"Funds Catalyst" <${process.env.EMAIL_USER}>`,
     to: subscriberEmail,
     subject: 'Welcome to the Funds Catalyst Newsletter!',
     html: `
