@@ -59,3 +59,17 @@ model ConsultancyBooking {
   userId            String?
   user              User?    @relation(fields: [userId], references: [id])
 }
+
+model SuperAdmin {
+  id String @id @default(uuid())
+  fullName String
+  email String
+  password String
+  createdAt         DateTime @default(now())
+}
+
+model SpecificEmail {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+}
