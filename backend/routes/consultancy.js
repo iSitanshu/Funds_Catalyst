@@ -28,14 +28,19 @@ router.post('/book_consultant', async (req, res) => {
 
     if(!booking) return res.status(400).json({ message: "Something went wrong. Please try again latter"})
 
-        return res.status(201).json({ message: "Consultancy Booking Created Successfully"})
+    return res.status(201).json({ message: "Consultancy Booking Created Successfully"})
 })
 
 // admin can fetch all the booking consultanct forms along with we will give which all are completed which all are not completed
 // along with count of the no of bookings
-// router.get('/fetch_bookings', async (req, res) => {
+router.get('/fetch_bookings', async (req, res) => {
+    const all_bookings = await prisma.consultancyBooking.findMany({
+        where: {}
+    })
+    const count = all_bookings.length;
 
-// })
+    return res.status(200).json({ message: "Here are the consultancy bookings", all_bookings, count })        
+})
 
 
 export default router;
