@@ -12,7 +12,7 @@ const AdminIntro = () => {
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
           Manage your newsletter, blogs, consultancy bookings, and more from one powerful dashboard
         </p>
-        <Link to="/admin">
+        <Link to="/sign-up">
           <Button size="lg" className="gap-2 mt-4">
             Go to Dashboard
             <ArrowRight className="h-5 w-5" />

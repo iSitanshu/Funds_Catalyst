@@ -78,4 +78,45 @@ router.post('/signup', async (req, res) => {
     res.status(200).json({ message: "Signup successful", user: new_user });
 })
 
+router.post('/admin_signup', async (req, res) => {
+    const { success, data } = signupSchema.safeParse(req.body);
+    if (!success) {
+        return res.status(400).json({ message: "Invalid Request", error: data })
+    }
+
+    // check if the already exist in the SpecificEmail mail lists
+    const ispresentinthelist = await prisma.specificEmail.findUnique({
+        where: {
+            email: data.email
+        }
+    })
+    if (!ispresentinthelist) return res.status(400).json({ message: "You are not authorized to create an admin account" });
+
+    //check if the user already exists or not
+    const existing_user = await prisma.user.findUnique({
+        where: {
+            email: data.email
+        }
+    })
+    if (existing_user) return res.status(400).json({ message: "User already exists" });
+    // bcrypt to encrypt the password
+    let encrypted_password;
+    try {
+        encrypted_password = await bcrypt.hash(data.password, salt_rounds);
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Error encrypting password" });
+    }
+
+    const new_admin = await prisma.user.create({
+        data: {
+            email: data.email,
+            username: data.username,
+            password: encrypted_password,
+        }
+    })
+
+    res.status(200).json({ message: "Admin Signup successful", user: new_admin });
+})
+
 export default router;
