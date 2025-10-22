@@ -64,10 +64,12 @@ model ConsultancyBooking {
   fullName          String
   email             String
   phone             String
-  organization      String?
-  organizationType  String?
-  requirement       String?
+  organization      String
+  organizationType  String
+  requirement       String
+  message           String
   createdAt         DateTime @default(now())
+  completed         Boolean
 
   // Optional relation to User (for authenticated bookings)
   userId            String?
