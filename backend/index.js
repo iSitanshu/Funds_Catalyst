@@ -18,6 +18,8 @@ app.use("/api/auth", authRouter);
 app.use("/api/payment", razorpayRouter);
 app.use("/api/newsletter", newsletterRouter);
 app.use("/api/consultancy", consultancyRouter)
+// network
+// blogs
 
 app.listen(PORT, () => {
    console.log(`Server is running on PORT: ${PORT}`);
