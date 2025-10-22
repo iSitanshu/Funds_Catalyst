@@ -2,7 +2,7 @@ import { Router } from "express"
 import Razorpay from "razorpay"
 import crypto from 'crypto';
 import { paymentSchema } from './../types.js'
-import { sendDonationEmail } from "./email.js";
+import { sendDonationEmail } from "../services/donationEmail.js";
 
 const router = Router();
 

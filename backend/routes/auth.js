@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import { signinSchema, signupSchema } from "./../types.js";
 import { PrismaClient } from "@prisma/client";
 import jwt from 'jsonwebtoken';
+import { email } from "zod";
 
 const prisma = new PrismaClient();
 const salt_rounds = Number(process.env.SALT_ROUNDS) || 10;
@@ -24,15 +25,17 @@ router.post('/login', async (req, res) => {
     if (!existing_user) return res.status(400).json({ message: "User does not exist" });
 
     // check the password with the encrypted password and return the token if matches
-    bcrypt.compare(data.password, existing_user.password, (err, result) => {
-        if (err) {
-            console.error(err);
-            return res.status(500).json({ message: "Error comparing passwords" });
-        }
-        if (!result) {
-            return res.status(400).json({ message: "Invalid password" });
-        }
-    })
+    let passwordMatch;
+    try {
+        passwordMatch = await bcrypt.compare(data.password, existing_user.password);
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Error comparing passwords" });
+    }
+
+    if (!passwordMatch) {
+        return res.status(400).json({ message: "Invalid password" });
+    }
 
     const token = jwt.sign(
         { email: existing_user.email, id: existing_user.id },
@@ -75,7 +78,7 @@ router.post('/signup', async (req, res) => {
         }
     })
 
-    res.status(200).json({ message: "Signup successful", user: new_user });
+    res.status(200).json({ message: "Signup successful", success: true });
 })
 
 router.post('/admin_signup', async (req, res) => {
@@ -85,7 +88,7 @@ router.post('/admin_signup', async (req, res) => {
     }
 
     // check if the already exist in the SpecificEmail mail lists
-    const ispresentinthelist = await prisma.specificEmail.findUnique({
+    const ispresentinthelist = await prisma.specificEmailList.findUnique({
         where: {
             email: data.email
         }
@@ -108,7 +111,7 @@ router.post('/admin_signup', async (req, res) => {
         return res.status(500).json({ message: "Error encrypting password" });
     }
 
-    const new_admin = await prisma.user.create({
+    const new_admin = await prisma.admin.create({
         data: {
             email: data.email,
             username: data.username,
@@ -116,7 +119,59 @@ router.post('/admin_signup', async (req, res) => {
         }
     })
 
-    res.status(200).json({ message: "Admin Signup successful", user: new_admin });
+    const token = jwt.sign(
+        {
+            email: new_admin.email,
+            id: new_admin.id
+        },
+        secret_key,
+        { expiresIn: "1d" }
+    )
+
+    res.status(200).json({ message: "Admin Signup successful", success: true });  
+})
+
+router.post('/admin_login', async (req, res) => {
+    const { success, data } = signinSchema.safeParse(req.body);
+    if (!success) {
+        return res.status(400).json({ message: "Invalid Request", error: data })
+    }
+    // check if this email is present in the specificEmail list 
+    const ispresentinthelist = await prisma.specificEmailList.findUnique({
+        where: {
+            email: data.email
+        }
+    })
+    if (!ispresentinthelist) return res.status(400).json({ message: "You are not authorized to create an admin account" });
+
+    // then check whether this user signedup or not 
+    const existing_admin = await prisma.admin.findUnique({
+        where: {
+            email: data.email
+        }
+    });
+    if (!existing_admin) return res.status(400).json({ message: "Admin does not exits" });
+
+    // check the password with the encrypted password and return the token if matches
+    let passwordMatch;
+    try {
+        passwordMatch = await bcrypt.compare(data.password, existing_admin.password);
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Error comparing passwords" });
+    }
+
+    if (!passwordMatch) {
+        return res.status(400).json({ message: "Invalid password" });
+    }
+
+    const token = jwt.sign(
+        { email: existing_admin.email, id: existing_admin.id },
+        secret_key,
+        { expiresIn: "7d" }
+    )
+
+    return res.status(200).json({ message: "Admin Login successful", success: true, token });
 })
 
 export default router;

@@ -20,3 +20,8 @@ export const paymentSchema = z.object({
     .gte(1, "Amount must be at least 1.") // Minimum amount
     .lte(100000, "Amount must be less than or equal to 1,00,000.") // Maximum amount
 });
+
+export const newsletterSchema = z.object({
+    email: z.email(),
+    name: z.string().min(2).optional()
+})
