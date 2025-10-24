@@ -4,22 +4,30 @@ import upload from '../middleware/multer.js';
 
 const router = Router();
 
-router.post('/upload', upload.single('image'), async (req, res) => {
+router.post("/upload", upload.single("image"), async (req, res) => {
   try {
     if (!req.file) {
-      return res.status(400).json({ error: 'No image file provided.' });
+      return res.status(400).json({ error: "No image file provided." });
     }
-    
+
+    console.log("📤 Uploading image to Cloudinary...");
+
     const result = await uploadImage(req.file.buffer);
 
-    res.status(201).json({
+    console.log("✅ Upload successful:", result.secure_url);
+
+    // 🟢 Always RETURN the response to prevent further execution
+    return res.status(201).json({
       imageUrl: result.secure_url,
-      publicId: result.public_id
+      publicId: result.public_id,
     });
+
   } catch (error) {
-    console.error('Error in /upload route:', error);
-    res.status(500).json({ error: 'Failed to upload image.' });
+    // 🔴 Only actual errors should reach here
+    console.error("❌ Error in /upload route:", error);
+    return res.status(500).json({ error: "Failed to upload image." });
   }
 });
+
 
 export default router;
