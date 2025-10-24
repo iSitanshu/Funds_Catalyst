@@ -12,15 +12,15 @@ datasource db {
 // ===========================
 
 model User {
-  id                     String               @id @default(uuid())
-  username               String
-  email                  String               @unique
-  password               String
-  createdAt              DateTime             @default(now())
+  id        String   @id @default(uuid())
+  username  String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
 
   // Relations
-  consultancyBookings    ConsultancyBooking[]
-  donations              Donation[]
+  consultancyBookings ConsultancyBooking[]
+  donations           Donation[]
 }
 
 model Admin {
@@ -32,8 +32,8 @@ model Admin {
   createdAt DateTime @default(now())
 
   // Admin can create or update blogs and networks
-  blogs     Blog[]   @relation("AdminBlogs")
-  networks  Network[] @relation("AdminNetworks")
+  blogs    Blog[]    @relation("AdminBlogs")
+  networks Network[] @relation("AdminNetworks")
 }
 
 enum Role {
@@ -45,35 +45,31 @@ model Blog {
   id               String   @id @default(uuid())
   title            String
   shortDescription String
-  longDescription  String
-  question1        String?
-  answer1          String?
-  question2        String?
-  answer2          String?
-  position         Int      @default(0) // Used for manual ordering
+  content          String // rich text HTML content from the editor
+  position         Int      @default(0) // Manual ordering
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 
-  // Optional admin relation
-  adminId          String?
-  admin            Admin?   @relation("AdminBlogs", fields: [adminId], references: [id])
+  // Relation to Admin
+  adminId String?
+  admin   Admin?  @relation("AdminBlogs", fields: [adminId], references: [id])
 }
 
 model ConsultancyBooking {
-  id                String   @id @default(uuid())
-  fullName          String
-  email             String
-  phone             String
-  organization      String
-  organizationType  String
-  requirement       String
-  message           String
-  createdAt         DateTime @default(now())
-  completed         Boolean
+  id               String   @id @default(uuid())
+  fullName         String
+  email            String
+  phone            String
+  organization     String
+  organizationType String
+  requirement      String
+  message          String
+  createdAt        DateTime @default(now())
+  completed        Boolean
 
   // Optional relation to User (for authenticated bookings)
-  userId            String?
-  user              User?    @relation(fields: [userId], references: [id])
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id])
 }
 
 model NewsletterSubscriber {
@@ -98,18 +94,18 @@ model Donation {
   createdAt  DateTime @default(now())
 
   // Optional relation to User
-  userId     String?
-  user       User?    @relation(fields: [userId], references: [id])
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id])
 }
 
 model Network {
-  id             String   @id @default(uuid())
-  imageUrl       String   // Store image URL or path
-  description    String
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  id          String   @id @default(uuid())
+  imageUrl    String // Store image URL or path
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   // Optional admin who created/updated it
-  adminId        String?
-  admin          Admin?   @relation("AdminNetworks", fields: [adminId], references: [id])
+  adminId String?
+  admin   Admin?  @relation("AdminNetworks", fields: [adminId], references: [id])
 }

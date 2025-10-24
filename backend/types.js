@@ -67,11 +67,6 @@ export const bookingId = z.object({
 export const blogSchema = z.object({
   title: z.string().min(3, "Title must be at least 3 characters long"),
   shortDescription: z.string().min(10, "Short description must be at least 10 characters"),
-  longDescription: z.string().min(20, "Long description must be at least 20 characters"),
-  question1: z.string().optional(),
-  answer1: z.string().optional(),
-  question2: z.string().optional(),
-  answer2: z.string().optional(),
+  content: z.string().min(20, "Content must be at least 20 characters long"),
   position: z.number().optional(),
-  adminId: z.string().uuid().optional(),
 });
