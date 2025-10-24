@@ -101,10 +101,6 @@ export function SendMail() {
                 <span className="text-sm font-medium">Total Subscribers</span>
                 <span className="text-2xl font-bold text-primary">{mockSubscribers.length}</span>
               </div>
-              <div className="flex items-center justify-between p-3 bg-accent rounded-lg">
-                <span className="text-sm font-medium">Last Sent</span>
-                <span className="text-sm text-muted-foreground">2 days ago</span>
-              </div>
             </CardContent>
           </Card>
 

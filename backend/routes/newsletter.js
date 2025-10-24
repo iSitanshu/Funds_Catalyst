@@ -61,6 +61,7 @@ router.post('/send_newsletter', async (req, res) => {
     const emails = await prisma.newsletterSubscriber.findMany({
         where: {}
     })
+    
     const emailList = emails.map(index => index.email)
 
     await updateEmail(

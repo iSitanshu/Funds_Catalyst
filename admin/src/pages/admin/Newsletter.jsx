@@ -80,7 +80,7 @@ export function Newsletter() {
                 <TableHead>Name</TableHead>
                 <TableHead>Email</TableHead>
                 <TableHead>Subscribed On</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
+                {/* <TableHead className="text-right">Actions</TableHead> */}
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -89,7 +89,7 @@ export function Newsletter() {
                   <TableCell className="font-medium">{subscriber.name}</TableCell>
                   <TableCell>{subscriber.email}</TableCell>
                   <TableCell>{subscriber.subscribedOn}</TableCell>
-                  <TableCell className="text-right">
+                  {/* <TableCell className="text-right">
                     <Button
                       variant="ghost"
                       size="icon"
@@ -98,7 +98,7 @@ export function Newsletter() {
                     >
                       <Trash2 className="h-4 w-4" />
                     </Button>
-                  </TableCell>
+                  </TableCell> */}
                 </TableRow>
               ))}
             </TableBody>

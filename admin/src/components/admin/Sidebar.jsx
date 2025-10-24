@@ -1,4 +1,4 @@
-import { LayoutDashboard, Users, FileText, Calendar, Mail, Settings, ChevronLeft } from "lucide-react";
+import { LayoutDashboard, Users, FileText, Calendar, Mail, ChevronLeft, Network } from "lucide-react";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 
@@ -8,7 +8,7 @@ const menuItems = [
   { id: "blogs", label: "Blog Management", icon: FileText },
   { id: "consultancy", label: "Consultancy", icon: Calendar },
   { id: "mail", label: "Send Mail", icon: Mail },
-  { id: "settings", label: "Settings", icon: Settings },
+  { id: "network", label: "Network", icon: Network}
 ];
 
 export function Sidebar({ currentPage, onNavigate, collapsed, onToggleCollapse }) {

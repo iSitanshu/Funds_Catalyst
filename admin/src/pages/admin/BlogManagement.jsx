@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { Plus, Search, Edit, Trash2, ChevronUp, ChevronDown } from "lucide-react";
-import { Input } from "../../components/ui/input";
-import { Card } from "../../components/ui/card";
-import { Textarea } from "../../components/ui/textarea";
+import { Plus, Search, Edit, Trash2, ChevronUp, ChevronDown, Download } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Card } from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
@@ -10,7 +9,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "../../components/ui/dialog";
+} from "@/components/ui/dialog";
 import {
   Table,
   TableBody,
@@ -18,19 +17,19 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../../components/ui/table";
+} from "@/components/ui/table";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { RichTextEditor } from "@/components/RichTextEditor";
+import { Textarea } from "@/components/ui/textarea";
 
 const mockBlogs = [
   {
     id: 1,
     title: "Getting Started with React",
     shortDescription: "Learn the basics of React development",
-    longDescription: "A comprehensive guide to getting started with React...",
-    question1: "What is React?",
-    answer1: "React is a JavaScript library for building user interfaces.",
+    content: "<h2>Introduction to React</h2><p>React is a powerful JavaScript library that enables developers to build dynamic and interactive user interfaces with ease.</p><h3>Key Features</h3><ul><li>Component-based architecture</li><li>Virtual DOM for performance</li><li>Rich ecosystem</li></ul><p>In this comprehensive guide, we'll cover everything you need to know to get started with React development.</p>",
     createdDate: "2025-10-15",
     position: 1,
   },
@@ -38,9 +37,7 @@ const mockBlogs = [
     id: 2,
     title: "Advanced TypeScript Tips",
     shortDescription: "Master TypeScript with these advanced techniques",
-    longDescription: "Deep dive into TypeScript features...",
-    question1: "Why use TypeScript?",
-    answer1: "TypeScript adds static typing to JavaScript for better development.",
+    content: "<h2>TypeScript Advanced Patterns</h2><p>Deep dive into TypeScript features that will take your development to the next level.</p><h3>Topics Covered</h3><ol><li>Generics and type constraints</li><li>Utility types</li><li>Advanced patterns</li></ol><p>TypeScript adds static typing to JavaScript, making your code more maintainable and less error-prone.</p>",
     createdDate: "2025-10-10",
     position: 2,
   },
@@ -75,13 +72,18 @@ export function BlogManagement() {
   };
 
   const handleSave = () => {
+    if (!formData.title || !formData.shortDescription || !formData.content) {
+      toast.error("Please fill in all required fields");
+      return;
+    }
+
     if (editingBlog) {
       setBlogs(blogs.map((b) => (b.id === editingBlog.id ? { ...b, ...formData } : b)));
       toast.success("Blog updated successfully");
     } else {
       const newBlog = {
         ...formData,
-        id: Math.max(...blogs.map((b) => b.id)) + 1,
+        id: Math.max(...blogs.map((b) => b.id), 0) + 1,
       };
       setBlogs([...blogs, newBlog]);
       toast.success("Blog created successfully");
@@ -107,20 +109,62 @@ export function BlogManagement() {
     }
   };
 
+  const exportToWord = (blog) => {
+    // Create HTML content
+    const htmlContent = `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <meta charset="UTF-8">
+          <title>${blog.title}</title>
+          <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto; }
+            h1 { color: #333; }
+            .meta { color: #666; font-size: 0.9em; margin-bottom: 20px; }
+            img { max-width: 100%; height: auto; }
+          </style>
+        </head>
+        <body>
+          <h1>${blog.title}</h1>
+          <div class="meta">
+            <p><strong>Description:</strong> ${blog.shortDescription}</p>
+            <p><strong>Created:</strong> ${blog.createdDate}</p>
+          </div>
+          <div class="content">
+            ${blog.content}
+          </div>
+        </body>
+      </html>
+    `;
+
+    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${blog.title.replace(/\s+/g, '-')}.html`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    toast.success("Blog exported successfully");
+  };
+
   return (
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Blog Management</h1>
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            Blog Management
+          </h1>
           <p className="text-muted-foreground mt-1">Create, edit, and organize your blog posts</p>
         </div>
-        <Button onClick={() => handleOpenDialog()} className="gap-2">
+        <Button onClick={() => handleOpenDialog()} className="gap-2 shadow-lg hover:shadow-xl transition-all">
           <Plus className="h-4 w-4" />
           Add Blog
         </Button>
       </div>
 
-      <Card className="p-6">
+      <Card className="p-6 shadow-lg border-border/50">
         <div className="relative mb-6 max-w-md">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
@@ -131,10 +175,10 @@ export function BlogManagement() {
           />
         </div>
 
-        <div className="rounded-md border">
+        <div className="rounded-md border border-border/50 overflow-hidden">
           <Table>
             <TableHeader>
-              <TableRow>
+              <TableRow className="bg-muted/30">
                 <TableHead className="w-20">Position</TableHead>
                 <TableHead>Title</TableHead>
                 <TableHead>Short Description</TableHead>
@@ -144,7 +188,7 @@ export function BlogManagement() {
             </TableHeader>
             <TableBody>
               {filteredBlogs.map((blog, index) => (
-                <TableRow key={blog.id}>
+                <TableRow key={blog.id} className="hover:bg-muted/10 transition-colors">
                   <TableCell>
                     <div className="flex items-center gap-1">
                       <span className="font-medium">{blog.position}</span>
@@ -178,8 +222,16 @@ export function BlogManagement() {
                       <Button
                         variant="ghost"
                         size="icon"
+                        onClick={() => exportToWord(blog)}
+                        className="hover:bg-accent/10 hover:text-accent"
+                      >
+                        <Download className="h-4 w-4" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
                         onClick={() => handleOpenDialog(blog)}
-                        className="hover:bg-primary/10"
+                        className="hover:bg-primary/10 hover:text-primary"
                       >
                         <Edit className="h-4 w-4" />
                       </Button>
@@ -203,7 +255,9 @@ export function BlogManagement() {
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>{editingBlog ? "Edit Blog" : "Create New Blog"}</DialogTitle>
+            <DialogTitle className="text-2xl bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              {editingBlog ? "Edit Blog" : "Create New Blog"}
+            </DialogTitle>
             <DialogDescription>
               {editingBlog ? "Update your blog post details" : "Add a new blog post to your website"}
             </DialogDescription>
@@ -229,59 +283,21 @@ export function BlogManagement() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="longDesc">Long Description *</Label>
-              <Textarea
-                id="longDesc"
-                value={formData.longDescription || ""}
-                onChange={(e) => setFormData({ ...formData, longDescription: e.target.value })}
-                placeholder="Full blog content"
-                rows={6}
+              <Label htmlFor="content">Blog Content *</Label>
+              <p className="text-sm text-muted-foreground mb-2">
+                Write your blog content below. Use the toolbar to format text, add headings, lists, images, and links.
+              </p>
+              <RichTextEditor
+                content={formData.content || ""}
+                onChange={(html) => setFormData({ ...formData, content: html })}
               />
-            </div>
-            <div className="grid gap-4 md:grid-cols-2">
-              <div className="space-y-2">
-                <Label htmlFor="q1">Question 1 (Optional)</Label>
-                <Input
-                  id="q1"
-                  value={formData.question1 || ""}
-                  onChange={(e) => setFormData({ ...formData, question1: e.target.value })}
-                  placeholder="FAQ question"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="a1">Answer 1</Label>
-                <Input
-                  id="a1"
-                  value={formData.answer1 || ""}
-                  onChange={(e) => setFormData({ ...formData, answer1: e.target.value })}
-                  placeholder="FAQ answer"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="q2">Question 2 (Optional)</Label>
-                <Input
-                  id="q2"
-                  value={formData.question2 || ""}
-                  onChange={(e) => setFormData({ ...formData, question2: e.target.value })}
-                  placeholder="FAQ question"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="a2">Answer 2</Label>
-                <Input
-                  id="a2"
-                  value={formData.answer2 || ""}
-                  onChange={(e) => setFormData({ ...formData, answer2: e.target.value })}
-                  placeholder="FAQ answer"
-                />
-              </div>
             </div>
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
               Cancel
             </Button>
-            <Button onClick={handleSave}>
+            <Button onClick={handleSave} className="shadow-lg">
               {editingBlog ? "Update Blog" : "Create Blog"}
             </Button>
           </DialogFooter>

@@ -59,3 +59,19 @@ export const consultancyBookingSchema = z.object({
   completed: z.boolean().optional(), // Usually not set by the user, optional in form
   userId: z.string().uuid().optional(), // Optional if user is authenticated
 });
+
+export const bookingId = z.object({
+  bookingId: z.string().max()
+})
+
+export const blogSchema = z.object({
+  title: z.string().min(3, "Title must be at least 3 characters long"),
+  shortDescription: z.string().min(10, "Short description must be at least 10 characters"),
+  longDescription: z.string().min(20, "Long description must be at least 20 characters"),
+  question1: z.string().optional(),
+  answer1: z.string().optional(),
+  question2: z.string().optional(),
+  answer2: z.string().optional(),
+  position: z.number().optional(),
+  adminId: z.string().uuid().optional(),
+});

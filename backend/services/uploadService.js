@@ -1,29 +1,25 @@
 import cloudinary from "../middleware/cloudinary.js";
-import streamifier from 'streamifier';
+import streamifier from "streamifier";
 
 const uploadImage = async (fileBuffer) => {
-  return new Promise((resolve, reject) => {
-    let stream = cloudinary.uploader.upload_stream(
-      (error, result) => {
-        if (result) {
-          resolve(result);
-        } else {
-          reject(error);
-        }
-      }
-    );
-    streamifier.createReadStream(fileBuffer).pipe(stream);
-  });
-};
-
-const deleteImage = async (publicId) => {
   try {
-    await cloudinary.uploader.destroy(publicId);
-    return { success: true };
-  } catch (error) {
-    console.error('Cloudinary deletion error:', error);
-    throw new Error('Image deletion failed.');
+    return await new Promise((resolve, reject) => {
+      const stream = cloudinary.uploader.upload_stream(
+        { resource_type: "image", folder: "networks" },
+        (error, result) => {
+          if (error) {
+            console.error("Cloudinary upload error:", error);
+            return reject(error);
+          }
+          resolve(result);
+        }
+      );
+      streamifier.createReadStream(fileBuffer).pipe(stream);
+    });
+  } catch (err) {
+    console.error("Upload image failed:", err);
+    throw new Error("Cloudinary upload failed");
   }
 };
 
-export { uploadImage, deleteImage };
+export { uploadImage };

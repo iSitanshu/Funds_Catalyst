@@ -104,7 +104,6 @@ model Donation {
 
 model Network {
   id             String   @id @default(uuid())
-  name           String
   imageUrl       String   // Store image URL or path
   description    String
   createdAt      DateTime @default(now())

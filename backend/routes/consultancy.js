@@ -42,5 +42,4 @@ router.get('/fetch_bookings', async (req, res) => {
     return res.status(200).json({ message: "Here are the consultancy bookings", all_bookings, count })        
 })
 
-
 export default router;

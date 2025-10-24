@@ -6,7 +6,7 @@ import {Newsletter} from "./admin/Newsletter";
 import {BlogManagement} from "./admin/BlogManagement";
 import {SendMail} from "./admin/SendMail";
 import {Consultancy} from "./admin/Consultancy";
-import {Settings} from "./admin/Settings";
+import {Network} from "./admin/Network"
 
 const Admin = () => {
   const [currentPage, setCurrentPage] = useState("dashboard");
@@ -24,8 +24,8 @@ const Admin = () => {
         return <Consultancy />;
       case "mail":
         return <SendMail />;
-      case "settings":
-        return <Settings />;
+      case "network":
+        return <Network />
       default:
         return <Dashboard />;
     }
