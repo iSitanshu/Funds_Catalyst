@@ -5,11 +5,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 
 export function Dashboard() {
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-  console.log("url", BACKEND_URL);
-
+  
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  
   useEffect(() => {
     const fetchDashboard = async () => {
       try {
