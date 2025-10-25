@@ -1,5 +1,13 @@
-import { useState } from "react";
-import { Plus, Search, Edit, Trash2, ChevronUp, ChevronDown, Download } from "lucide-react";
+import { useEffect, useState } from "react";
+import {
+  Plus,
+  Search,
+  Edit,
+  Trash2,
+  ChevronUp,
+  ChevronDown,
+  Download,
+} from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import {
@@ -24,39 +32,48 @@ import { Label } from "@/components/ui/label";
 import { RichTextEditor } from "@/components/RichTextEditor";
 import { Textarea } from "@/components/ui/textarea";
 
-const mockBlogs = [
-  {
-    id: 1,
-    title: "Getting Started with React",
-    shortDescription: "Learn the basics of React development",
-    content: "<h2>Introduction to React</h2><p>React is a powerful JavaScript library that enables developers to build dynamic and interactive user interfaces with ease.</p><h3>Key Features</h3><ul><li>Component-based architecture</li><li>Virtual DOM for performance</li><li>Rich ecosystem</li></ul><p>In this comprehensive guide, we'll cover everything you need to know to get started with React development.</p>",
-    createdDate: "2025-10-15",
-    position: 1,
-  },
-  {
-    id: 2,
-    title: "Advanced TypeScript Tips",
-    shortDescription: "Master TypeScript with these advanced techniques",
-    content: "<h2>TypeScript Advanced Patterns</h2><p>Deep dive into TypeScript features that will take your development to the next level.</p><h3>Topics Covered</h3><ol><li>Generics and type constraints</li><li>Utility types</li><li>Advanced patterns</li></ol><p>TypeScript adds static typing to JavaScript, making your code more maintainable and less error-prone.</p>",
-    createdDate: "2025-10-10",
-    position: 2,
-  },
-];
-
 export function BlogManagement() {
-  const [blogs, setBlogs] = useState(mockBlogs);
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
+  const [blogs, setBlogs] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingBlog, setEditingBlog] = useState(null);
   const [formData, setFormData] = useState({});
+  const [loading, setLoading] = useState(true);
 
+  // ✅ Fetch blogs from backend
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const response = await fetch(`${BACKEND_URL}/api/blogs/fetch_blogs`);
+        const data = await response.json();
+        if (data.success) {
+          setBlogs(data.data.sort((a, b) => a.position - b.position));
+        } else {
+          toast.error("Failed to fetch blogs");
+        }
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+        toast.error("Error fetching blogs");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlogs();
+  }, [BACKEND_URL]);
+
+  // ✅ Filter and sort blogs
   const filteredBlogs = blogs
-    .filter((blog) =>
-      blog.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      blog.shortDescription.toLowerCase().includes(searchQuery.toLowerCase())
+    .filter(
+      (blog) =>
+        blog.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        blog.shortDescription?.toLowerCase().includes(searchQuery.toLowerCase())
     )
     .sort((a, b) => a.position - b.position);
 
+  // ✅ Dialog open handler
   const handleOpenDialog = (blog) => {
     if (blog) {
       setEditingBlog(blog);
@@ -64,53 +81,116 @@ export function BlogManagement() {
     } else {
       setEditingBlog(null);
       setFormData({
-        position: blogs.length + 1,
-        createdDate: new Date().toISOString().split('T')[0],
+        title: "",
+        shortDescription: "",
+        content: "",
       });
     }
     setIsDialogOpen(true);
   };
 
-  const handleSave = () => {
+  // ✅ Create or Update Blog
+  const handleSave = async () => {
     if (!formData.title || !formData.shortDescription || !formData.content) {
       toast.error("Please fill in all required fields");
       return;
     }
 
-    if (editingBlog) {
-      setBlogs(blogs.map((b) => (b.id === editingBlog.id ? { ...b, ...formData } : b)));
-      toast.success("Blog updated successfully");
-    } else {
-      const newBlog = {
-        ...formData,
-        id: Math.max(...blogs.map((b) => b.id), 0) + 1,
-      };
-      setBlogs([...blogs, newBlog]);
-      toast.success("Blog created successfully");
+    try {
+      if (editingBlog) {
+        // Update blog
+        const res = await fetch(
+          `${BACKEND_URL}/api/blogs/edit_blog/${editingBlog.id}`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              title: formData.title,
+              shortDescription: formData.shortDescription,
+              content: formData.content,
+            }),
+          }
+        );
+
+        const data = await res.json();
+
+        if (res.ok) {
+          toast.success("Blog updated successfully");
+          setBlogs((prev) =>
+            prev.map((b) =>
+              b.id === editingBlog.id ? data.updatedBlog : b
+            )
+          );
+          setIsDialogOpen(false);
+        } else {
+          toast.error(data.message || "Failed to update blog");
+        }
+      } else {
+        // Create blog
+        const res = await fetch(`${BACKEND_URL}/api/blogs/add_blogs`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          toast.success("Blog created successfully");
+          setBlogs((prev) => [...prev, data.data]);
+          setIsDialogOpen(false);
+        } else {
+          toast.error(data.message || "Failed to create blog");
+        }
+      }
+    } catch (error) {
+      console.error("Error saving blog:", error);
+      toast.error("Error saving blog");
     }
-    setIsDialogOpen(false);
   };
 
-  const handleDelete = (id) => {
-    setBlogs(blogs.filter((b) => b.id !== id));
-    toast.success("Blog deleted successfully");
+  // ✅ Delete blog
+  const handleDelete = async (id) => {
+    try {
+      const res = await fetch(`${BACKEND_URL}/api/blogs/delete_blog/${id}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+
+      if (res.ok) {
+        setBlogs((prev) => prev.filter((b) => b.id !== id));
+        toast.success("Blog deleted successfully");
+      } else {
+        toast.error(data.message || "Failed to delete blog");
+      }
+    } catch (error) {
+      console.error("Error deleting blog:", error);
+      toast.error("Error deleting blog");
+    }
   };
 
+  // ✅ Local reordering only (for UI)
   const handleMove = (id, direction) => {
     const currentIndex = blogs.findIndex((b) => b.id === id);
     const newBlogs = [...blogs];
-    const targetIndex = direction === "up" ? currentIndex - 1 : currentIndex + 1;
+    const targetIndex =
+      direction === "up" ? currentIndex - 1 : currentIndex + 1;
 
     if (targetIndex >= 0 && targetIndex < blogs.length) {
-      [newBlogs[currentIndex], newBlogs[targetIndex]] = [newBlogs[targetIndex], newBlogs[currentIndex]];
+      [newBlogs[currentIndex], newBlogs[targetIndex]] = [
+        newBlogs[targetIndex],
+        newBlogs[currentIndex],
+      ];
       newBlogs.forEach((blog, idx) => (blog.position = idx + 1));
       setBlogs(newBlogs);
       toast.success("Blog position updated");
     }
   };
 
+  // ✅ Export as HTML
   const exportToWord = (blog) => {
-    // Create HTML content
     const htmlContent = `
       <!DOCTYPE html>
       <html>
@@ -128,7 +208,7 @@ export function BlogManagement() {
           <h1>${blog.title}</h1>
           <div class="meta">
             <p><strong>Description:</strong> ${blog.shortDescription}</p>
-            <p><strong>Created:</strong> ${blog.createdDate}</p>
+            <p><strong>Created:</strong> ${new Date(blog.createdAt).toLocaleDateString()}</p>
           </div>
           <div class="content">
             ${blog.content}
@@ -137,11 +217,11 @@ export function BlogManagement() {
       </html>
     `;
 
-    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const blob = new Blob([htmlContent], { type: "text/html" });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
-    a.download = `${blog.title.replace(/\s+/g, '-')}.html`;
+    a.download = `${blog.title.replace(/\s+/g, "-")}.html`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -149,6 +229,26 @@ export function BlogManagement() {
     toast.success("Blog exported successfully");
   };
 
+  // ✅ Loading & Empty states
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <p className="text-muted-foreground animate-pulse">
+          Loading blogs...
+        </p>
+      </div>
+    );
+  }
+
+  if (!blogs.length) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <p className="text-red-500">No blogs found.</p>
+      </div>
+    );
+  }
+
+  // ✅ UI
   return (
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between">
@@ -156,9 +256,14 @@ export function BlogManagement() {
           <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
             Blog Management
           </h1>
-          <p className="text-muted-foreground mt-1">Create, edit, and organize your blog posts</p>
+          <p className="text-muted-foreground mt-1">
+            Create, edit, and organize your blog posts
+          </p>
         </div>
-        <Button onClick={() => handleOpenDialog()} className="gap-2 shadow-lg hover:shadow-xl transition-all">
+        <Button
+          onClick={() => handleOpenDialog()}
+          className="gap-2 shadow-lg hover:shadow-xl transition-all"
+        >
           <Plus className="h-4 w-4" />
           Add Blog
         </Button>
@@ -188,7 +293,10 @@ export function BlogManagement() {
             </TableHeader>
             <TableBody>
               {filteredBlogs.map((blog, index) => (
-                <TableRow key={blog.id} className="hover:bg-muted/10 transition-colors">
+                <TableRow
+                  key={blog.id}
+                  className="hover:bg-muted/10 transition-colors"
+                >
                   <TableCell>
                     <div className="flex items-center gap-1">
                       <span className="font-medium">{blog.position}</span>
@@ -215,8 +323,12 @@ export function BlogManagement() {
                     </div>
                   </TableCell>
                   <TableCell className="font-medium">{blog.title}</TableCell>
-                  <TableCell className="max-w-xs truncate">{blog.shortDescription}</TableCell>
-                  <TableCell>{blog.createdDate}</TableCell>
+                  <TableCell className="max-w-xs truncate">
+                    {blog.shortDescription}
+                  </TableCell>
+                  <TableCell>
+                    {new Date(blog.createdAt).toLocaleDateString()}
+                  </TableCell>
                   <TableCell className="text-right">
                     <div className="flex justify-end gap-2">
                       <Button
@@ -252,6 +364,7 @@ export function BlogManagement() {
         </div>
       </Card>
 
+      {/* ✅ Create / Edit Dialog */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
@@ -259,16 +372,21 @@ export function BlogManagement() {
               {editingBlog ? "Edit Blog" : "Create New Blog"}
             </DialogTitle>
             <DialogDescription>
-              {editingBlog ? "Update your blog post details" : "Add a new blog post to your website"}
+              {editingBlog
+                ? "Update your blog post details"
+                : "Add a new blog post to your website"}
             </DialogDescription>
           </DialogHeader>
+
           <div className="space-y-4 py-4">
             <div className="space-y-2">
               <Label htmlFor="title">Blog Title *</Label>
               <Input
                 id="title"
                 value={formData.title || ""}
-                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, title: e.target.value })
+                }
                 placeholder="Enter blog title"
               />
             </div>
@@ -277,7 +395,9 @@ export function BlogManagement() {
               <Textarea
                 id="shortDesc"
                 value={formData.shortDescription || ""}
-                onChange={(e) => setFormData({ ...formData, shortDescription: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, shortDescription: e.target.value })
+                }
                 placeholder="Brief description for preview"
                 rows={2}
               />
@@ -285,7 +405,8 @@ export function BlogManagement() {
             <div className="space-y-2">
               <Label htmlFor="content">Blog Content *</Label>
               <p className="text-sm text-muted-foreground mb-2">
-                Write your blog content below. Use the toolbar to format text, add headings, lists, images, and links.
+                Write your blog content below. Use the toolbar to format text,
+                add headings, lists, images, and links.
               </p>
               <RichTextEditor
                 content={formData.content || ""}
@@ -293,6 +414,7 @@ export function BlogManagement() {
               />
             </div>
           </div>
+
           <DialogFooter>
             <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
               Cancel

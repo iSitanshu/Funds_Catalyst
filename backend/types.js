@@ -68,5 +68,4 @@ export const blogSchema = z.object({
   title: z.string().min(3, "Title must be at least 3 characters long"),
   shortDescription: z.string().min(10, "Short description must be at least 10 characters"),
   content: z.string().min(20, "Content must be at least 20 characters long"),
-  position: z.number().optional(),
 });

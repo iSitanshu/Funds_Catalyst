@@ -15,7 +15,6 @@ router.post("/add_blogs", async (req, res) => {
         title: validatedData.title,
         shortDescription: validatedData.shortDescription,
         content: validatedData.content,
-        position: validatedData.position ?? 0,
       },
     });
 
@@ -45,7 +44,7 @@ router.post("/add_blogs", async (req, res) => {
 router.get("/fetch_blogs", async (req, res) => {
   try {
     const blogs = await prisma.blog.findMany({
-      orderBy: { position: "asc" },
+      orderBy: { createdAt: "asc" },
     });
 
     return res.status(200).json({
@@ -63,11 +62,38 @@ router.get("/fetch_blogs", async (req, res) => {
   }
 });
 
-router.patch('/edit_blogs', async (req, res) => {
-  const blogId = req.params.id;
+router.patch('/edit_blog/:id', async (req, res) => {
+  const { id: blogId } = req.params;
 
-  
-})
+  try {
+    const validatedData = blogSchema.parse(req.body);
+    const updatedBlog = await prisma.blog.update({
+      where: {
+        id: blogId
+      },
+      data: {
+        title: validatedData.title,
+        shortDescription: validatedData.shortDescription,
+        content: validatedData.content,
+      },
+    })
+    res.status(200).json({
+      message: 'Blog updated successfully',
+      updatedBlog,
+    });
+  } catch (error) {
+    if (error.code === 'P2025') {
+      return res.status(404).json({
+        message: 'Blog not found',
+      });
+    }
+    // Handle validation errors or other issues
+    res.status(500).json({
+      message: 'An error occurred while updating the blog',
+      error: error.message,
+    });
+  }
+});
 
 router.delete('/delete_blog/:id', async (req, res) => {
   const blogId = req.params.id;
