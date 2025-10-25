@@ -63,4 +63,40 @@ router.get("/fetch_blogs", async (req, res) => {
   }
 });
 
+router.patch('/edit_blogs', async (req, res) => {
+  const blogId = req.params.id;
+
+  
+})
+
+router.delete('/delete_blog/:id', async (req, res) => {
+  const blogId = req.params.id;
+
+  try {
+    const deletedBlog = await prisma.blog.delete({
+      where: {
+        id: blogId,
+      },
+    });
+    // Send a 200 OK status with a success message and the deleted blog object
+    res.status(200).json({
+      message: 'Blog deleted successfully',
+      deletedBlog,
+    });
+  } catch (error) {
+    // Handle specific errors, like a record not being found
+    if (error.code === 'P2025') {
+      return res.status(404).json({
+        message: 'Blog not found',
+      });
+    }
+    // Handle other errors, such as a database connection issue
+    res.status(500).json({
+      message: 'An error occurred while deleting the blog',
+      error: error.message,
+    });
+  }
+});
+
+
 export default router;

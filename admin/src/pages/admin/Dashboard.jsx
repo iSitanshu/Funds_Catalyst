@@ -13,7 +13,6 @@ export function Dashboard() {
     const fetchDashboard = async () => {
       try {
         const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/dashboard/get_dashboard`);
-        console.log(`${BACKEND_URL}/api/dashboard/get_dashboard`);
         const data = await response.json();
         if (data.success) {
           setDashboardData(data.data);
