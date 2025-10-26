@@ -1,0 +1,116 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ===========================
+// MODELS
+// ===========================
+
+model User {
+  id        String   @id @default(uuid())
+  username  String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+
+  // Relations
+  consultancyBookings ConsultancyBooking[]
+  donations           Donation[]
+}
+
+model Admin {
+  id        String   @id @default(uuid())
+  username  String
+  email     String   @unique
+  password  String
+  role      Role     @default(ADMIN)
+  createdAt DateTime @default(now())
+
+  // Admin can create or update blogs and networks
+  blogs    Blog[]    @relation("AdminBlogs")
+  networks Network[] @relation("AdminNetworks")
+}
+
+enum Role {
+  SUPERADMIN
+  ADMIN
+}
+
+model Blog {
+  id               String   @id @default(uuid())
+  title            String
+  shortDescription String
+  content          String // rich text HTML content from the editor
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  // Relation to Admin
+  adminId String?
+  admin   Admin?  @relation("AdminBlogs", fields: [adminId], references: [id])
+}
+
+model ConsultancyBooking {
+  id               String   @id @default(uuid())
+  fullName         String
+  email            String
+  phone            String
+  organization     String
+  organizationType String
+  requirement      String
+  message          String
+  createdAt        DateTime @default(now())
+  completed        Boolean
+
+  // Optional relation to User (for authenticated bookings)
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id])
+}
+
+model NewsletterSubscriber {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+}
+
+model SpecificEmailList {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+}
+
+model Donation {
+  id         String   @id @default(uuid())
+  amount     Float
+  currency   String   @default("USD")
+  donorName  String
+  donorEmail String
+  createdAt  DateTime @default(now())
+
+  // Optional relation to User
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id])
+}
+
+model Network {
+  id          String   @id @default(uuid())
+  imageUrl    String // Store image URL or path
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Optional admin who created/updated it
+  adminId String?
+  admin   Admin?  @relation("AdminNetworks", fields: [adminId], references: [id])
+}
