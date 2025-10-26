@@ -3,7 +3,6 @@ import bcrypt from 'bcrypt';
 import { signinSchema, signupSchema } from "./../types.js";
 import { PrismaClient } from "@prisma/client";
 import jwt from 'jsonwebtoken';
-import { email } from "zod";
 
 const prisma = new PrismaClient();
 const salt_rounds = Number(process.env.SALT_ROUNDS) || 10;
