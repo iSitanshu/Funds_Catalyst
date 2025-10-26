@@ -119,9 +119,7 @@ export function BlogManagement() {
         if (res.ok) {
           toast.success("Blog updated successfully");
           setBlogs((prev) =>
-            prev.map((b) =>
-              b.id === editingBlog.id ? data.updatedBlog : b
-            )
+            prev.map((b) => (b.id === editingBlog.id ? data.updatedBlog : b))
           );
           setIsDialogOpen(false);
         } else {
@@ -171,24 +169,6 @@ export function BlogManagement() {
     }
   };
 
-  // ✅ Local reordering only (for UI)
-  const handleMove = (id, direction) => {
-    const currentIndex = blogs.findIndex((b) => b.id === id);
-    const newBlogs = [...blogs];
-    const targetIndex =
-      direction === "up" ? currentIndex - 1 : currentIndex + 1;
-
-    if (targetIndex >= 0 && targetIndex < blogs.length) {
-      [newBlogs[currentIndex], newBlogs[targetIndex]] = [
-        newBlogs[targetIndex],
-        newBlogs[currentIndex],
-      ];
-      newBlogs.forEach((blog, idx) => (blog.position = idx + 1));
-      setBlogs(newBlogs);
-      toast.success("Blog position updated");
-    }
-  };
-
   // ✅ Export as HTML
   const exportToWord = (blog) => {
     const htmlContent = `
@@ -208,7 +188,9 @@ export function BlogManagement() {
           <h1>${blog.title}</h1>
           <div class="meta">
             <p><strong>Description:</strong> ${blog.shortDescription}</p>
-            <p><strong>Created:</strong> ${new Date(blog.createdAt).toLocaleDateString()}</p>
+            <p><strong>Created:</strong> ${new Date(
+              blog.createdAt
+            ).toLocaleDateString()}</p>
           </div>
           <div class="content">
             ${blog.content}
@@ -233,9 +215,7 @@ export function BlogManagement() {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <p className="text-muted-foreground animate-pulse">
-          Loading blogs...
-        </p>
+        <p className="text-muted-foreground animate-pulse">Loading blogs...</p>
       </div>
     );
   }
@@ -297,38 +277,19 @@ export function BlogManagement() {
                   key={blog.id}
                   className="hover:bg-muted/10 transition-colors"
                 >
-                  <TableCell>
-                    <div className="flex items-center gap-1">
-                      <span className="font-medium">{blog.position}</span>
-                      <div className="flex flex-col">
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-5 w-5"
-                          onClick={() => handleMove(blog.id, "up")}
-                          disabled={index === 0}
-                        >
-                          <ChevronUp className="h-3 w-3" />
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-5 w-5"
-                          onClick={() => handleMove(blog.id, "down")}
-                          disabled={index === filteredBlogs.length - 1}
-                        >
-                          <ChevronDown className="h-3 w-3" />
-                        </Button>
-                      </div>
-                    </div>
-                  </TableCell>
+                  {/* ✅ Serial number instead of arrows */}
+                  <TableCell className="font-medium">{index + 1}</TableCell>
+
                   <TableCell className="font-medium">{blog.title}</TableCell>
+
                   <TableCell className="max-w-xs truncate">
                     {blog.shortDescription}
                   </TableCell>
+
                   <TableCell>
                     {new Date(blog.createdAt).toLocaleDateString()}
                   </TableCell>
+
                   <TableCell className="text-right">
                     <div className="flex justify-end gap-2">
                       <Button

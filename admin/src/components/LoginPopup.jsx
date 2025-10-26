@@ -20,11 +20,10 @@ const LoginPopup = () => {
     setUserRegister({ ...userRegister, [e.target.name]: e.target.value });
   };
 
-  const handleloginSubmit = async () => {
+  const handleloginSubmit = async (e) => {
     e.preventDefault();
     setShowError(false);
     setLoading(true);
-
     
     // try {
     //   // Add this debug line to see what URL is actually being used

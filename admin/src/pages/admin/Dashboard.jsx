@@ -59,21 +59,18 @@ export function Dashboard() {
           value={totalCounts.subscribers}
           icon={Users}
           description="Newsletter subscribers"
-          trend={{ value: "+12% from last month", isPositive: true }}
         />
         <StatsCard
           title="Published Blogs"
           value={totalCounts.blogs}
           icon={FileText}
           description="Active blog posts"
-          trend={{ value: "+3 this week", isPositive: true }}
         />
         <StatsCard
           title="Consultancy Bookings"
           value={totalCounts.consultancyBookings}
           icon={Calendar}
           description="Pending requests"
-          trend={{ value: "+5 new", isPositive: true }}
         />
       </div>
 
