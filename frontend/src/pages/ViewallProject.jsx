@@ -1,74 +1,93 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
-import { project } from "../content";
-import { Card, CardHeader, CardTitle, CardContent } from "../components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { ArrowLeft } from "lucide-react";
+import { projects } from "@/content";
+import { Button } from "@/components/ui/button";
 
-const ViewallProject = () => {
+const ViewAllProjects = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50 text-gray-900">
-      {/* Header with background image */}
-      <header className="relative bg-cover bg-center py-24 shadow-sm" style={{ backgroundImage: "url('/images/portfolio-bg.jpg')" }}>
-        <div className="absolute inset-0 bg-black bg-opacity-50" />
-        <div className="relative container mx-auto px-4 text-center">
-          <h1 className="text-5xl font-bold text-white">Our Project Portfolio</h1>
-          <p className="mt-4 text-lg text-gray-200 max-w-2xl mx-auto">
-            Discover how we bring ideas to life with our expert consulting services
-          </p>
+    <div className="flex flex-col min-h-screen bg-background">
+      {/* Header with gradient overlay */}
+      <header className="relative bg-gradient-to-r from-primary via-primary/90 to-accent py-24 shadow-lg">
+        <div className="container mx-auto px-4">
+          <Button
+            variant="secondary"
+            onClick={() => navigate("/")}
+            className="mb-6"
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Home
+          </Button>
+          <div className="text-center">
+            <h1 className="text-5xl font-bold text-primary-foreground mb-4">
+              Our Project Portfolio
+            </h1>
+            <p className="mt-4 text-lg text-primary-foreground/90 max-w-2xl mx-auto">
+              Discover how we promote herbal farming, Ayurveda education, and sustainable rural development
+            </p>
+          </div>
         </div>
       </header>
 
       {/* Main content */}
       <main className="flex-grow container mx-auto px-4 py-16">
-        <h2 className="text-3xl font-semibold text-gray-800 mb-12 text-center">
+        <h2 className="text-3xl font-semibold text-foreground mb-12 text-center">
           Explore Our Projects
         </h2>
 
-        <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          {project.map((proj, idx) => (
-            <Card
-              key={idx}
-              className="border border-gray-200 bg-white transition-all duration-200 hover:shadow-xl cursor-pointer"
-              onClick={() => navigate(`/api/project/${proj.keyword}`)}
-            >
-              <div className="h-52 w-full overflow-hidden">
-                <img
-                  src={proj.image}
-                  alt={proj.title}
-                  className="h-full w-full object-cover"
-                />
-              </div>
-              <CardHeader className="px-6 pt-6">
-                <CardTitle className="text-xl font-semibold">
-                  {proj.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="px-6 pb-6 pt-2 text-gray-600 text-sm leading-relaxed">
-                {proj.description}
-              </CardContent>
-            </Card>
-          ))}
+        <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          {projects.map((proj, idx) => {
+            const Icon = proj.icon;
+            return (
+              <Card
+                key={idx}
+                className="border border-border bg-card transition-all duration-300 hover:shadow-[var(--shadow-hover)] hover:-translate-y-1 cursor-pointer overflow-hidden group"
+                onClick={() => navigate(`/project/${proj.keyword}`)}
+              >
+                <div className="h-56 w-full overflow-hidden relative">
+                  <img
+                    src={proj.image}
+                    alt={proj.title}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-60" />
+                  <div className="absolute bottom-4 right-4 flex h-12 w-12 items-center justify-center rounded-full bg-card shadow-lg">
+                    <Icon className="h-6 w-6 text-primary" />
+                  </div>
+                </div>
+                <CardHeader className="px-6 pt-6">
+                  <CardTitle className="text-xl font-semibold text-card-foreground group-hover:text-primary transition-colors">
+                    {proj.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="px-6 pb-6 pt-2 text-muted-foreground text-sm leading-relaxed">
+                  {proj.description}
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
       </main>
 
       {/* Footer CTA */}
-      <footer className="bg-white border-t mt-16">
+      <footer className="bg-card border-t border-border mt-16">
         <div className="container mx-auto px-4 py-10 text-center">
-          <p className="text-xl text-gray-800 mb-6 font-medium">
-            Want to discuss a project tailored for your business?
+          <p className="text-xl text-foreground mb-6 font-medium">
+            Want to learn more about our projects?
           </p>
-          <button
-            onClick={() => navigate.push("/api/contact")}
-            className=
-              "px-8 py-3 bg-indigo-600 text-white font-semibold text-lg rounded-md hover:bg-indigo-700 transition-colors duration-200"
+          <Button
+            size="lg"
+            onClick={() => navigate("/")}
+            className="bg-primary text-primary-foreground hover:bg-primary/90"
           >
-            Contact Us
-          </button>
+            Get Started Today
+          </Button>
         </div>
       </footer>
     </div>
   );
 };
 
-export default ViewallProject;
+export default ViewAllProjects;

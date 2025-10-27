@@ -1,43 +1,41 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowRight } from "lucide-react"; // ✅ Icon import
-import { project } from "../content";
+import { projects, projectsOverview } from "@/content";
 
-const ProjectSection = () => {
+const ProjectsSection = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const navigate = useNavigate();
-
-  const visibleProjects = project.slice(0, 3);
+  const visibleProjects = projects.slice(0, 3);
 
   return (
-    <section id="projects" className="py-26 bg-white">
-      <div className="container mx-auto px-4">
-        {/* Section Title */}
-        <div className="text-center mb-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Blogs
+    <section id="projects" className="py-20 px-4 bg-background">
+      <div className="container mx-auto max-w-7xl">
+        {/* Header */}
+        <div className="mb-16 text-center">
+          <h2 className="mb-4 text-4xl font-bold text-foreground md:text-5xl">
+            {projectsOverview.mainTitle}
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            We use our expertise, deep domain knowledge and the experience garnered over the last five
-            decades in our articles and posts about leadership hiring and our HR Consulting services.
+
+          <p className="mx-auto mb-8 max-w-3xl text-lg text-muted-foreground leading-relaxed">
+            {projectsOverview.mainDescription}
           </p>
+
+          <div className="flex flex-wrap justify-center gap-3">
+            {projectsOverview.schemes.map((scheme, index) => (
+              <span
+                key={index}
+                className="rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-sm font-medium text-primary"
+              >
+                {scheme}
+              </span>
+            ))}
+          </div>
         </div>
 
-        {/* View All Button - Left aligned */}
-        <div className="flex justify-end mb-6">
-          <button
-            onClick={() => navigate("/api/projects")}
-            className="flex items-center gap-2 text-yellow-600 font-semibold hover:text-yellow-800 transition duration-300 cursor-pointer group"
-          >
-            View All
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-          </button>
-        </div>
-
-        {/* Project Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {visibleProjects.map((service, index) => {
-            const Icon = service.icon;
+        {/* Projects Grid - Same hover style as ServiceSection */}
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {visibleProjects.map((project, index) => {
+            const Icon = project.icon;
             const isHovered = hoveredIndex === index;
 
             return (
@@ -45,48 +43,50 @@ const ProjectSection = () => {
                 key={index}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
-                className="relative overflow-hidden group cursor-pointer h-70"
-                onClick={() => navigate(`/api/projects/${service.keyword}`)}
+                className="relative overflow-hidden group cursor-pointer h-[280px]"
+                onClick={() => navigate(`/api/projects/${project.keyword}`)}
               >
-                {/* Image */}
+                {/* Image (always in color, no grayscale) */}
                 <div className="relative w-full h-full">
                   <img
-                    src={service.image}
-                    alt={service.title}
+                    src={project.image}
+                    alt={project.title}
                     className={`w-full h-full object-cover transition-all duration-500 ${
-                      isHovered ? "grayscale-0 scale-110" : "grayscale scale-100"
+                      isHovered ? "scale-110" : "scale-100"
                     }`}
                   />
+
+                  {/* Overlay (darker when not hovered) */}
                   <div
-                    className={`absolute inset-0 bg-black transition-opacity duration-500 ${
-                      isHovered ? "opacity-30" : "opacity-50"
+                    className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent transition-opacity duration-500 ${
+                      isHovered ? "opacity-60" : "opacity-80"
                     }`}
                   />
                 </div>
 
                 {/* Card Content */}
                 <div className="absolute inset-0 flex flex-col justify-between p-6">
+                  {/* Icon at top-right */}
                   <div className="flex justify-end">
                     <div
                       className={`transition-all duration-500 ${
                         isHovered
                           ? "opacity-100 translate-y-0"
-                          : "opacity-60 translate-y-0"
+                          : "opacity-80 translate-y-0"
                       }`}
                     >
-                      <Icon className="w-8 h-8 text-white" strokeWidth={1.5} />
+                      <Icon className="w-10 h-10 text-white" strokeWidth={1.5} />
                     </div>
                   </div>
 
+                  {/* Title + Description */}
                   <div>
-                    <h3 className="text-white text-xl font-semibold mb-2">
-                      {service.title}
+                    <h3 className="text-white text-2xl font-bold mb-3">
+                      {project.title}
                     </h3>
                     <div
-                      className={`${
-                        isHovered
-                          ? "w-1/2 h-0.5 bg-yellow-500 mb-4"
-                          : "w-12 h-0.5 bg-white mb-4"
+                      className={`transition-all duration-500 mb-4 ${
+                        isHovered ? "w-1/2 h-1 bg-primary" : "w-12 h-1 bg-white"
                       }`}
                     />
                     <div
@@ -96,7 +96,7 @@ const ProjectSection = () => {
                           : "opacity-0 translate-y-2 pointer-events-none"
                       }`}
                     >
-                      {service.description}
+                      {project.description}
                     </div>
                   </div>
                 </div>
@@ -109,4 +109,4 @@ const ProjectSection = () => {
   );
 };
 
-export default ProjectSection;
+export default ProjectsSection;

@@ -4,7 +4,7 @@ const ImpactSection = () => {
   const stats = [
     { icon: Users, value: "700+", label: "NGOs Supported" },
     { icon: TrendingUp, value: "₹100 Cr+", label: "Funding Facilitated" },
-    { icon: MapPin, value: "20+", label: "States Served" },
+    { icon: MapPin, value: "18+", label: "States Served" },
     { icon: Award, value: "8+", label: "Years Experience" },
   ];
 

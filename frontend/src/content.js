@@ -9,8 +9,11 @@ import {
   CheckCircle2,
   TrendingUp,
   Users,
-  Globe
+  Globe,
+  School,
+  Sprout
 } from "lucide-react";
+
 
 const steps = [
   {
@@ -108,11 +111,11 @@ const steps = [
 ];
 
 const capabilities = [
-  "NGO Registration & Compliance Management",
-  "CSR Strategy & Fund Facilitation",
-  "Government Tender Identification & Execution",
-  "DPR Writing & Project Design",
-  "End-to-End Implementation Support",
+  "Empanelled with NACOF, Govt. of India",
+  "Partnering in agriculture development programs",
+  "Collaborating with farmer cooperatives nationwide",
+  "Recognized for authenticity and trust",
+  "Driving sustainable rural growth initiatives",
 ];
 
 const services = [
@@ -174,57 +177,6 @@ const services = [
   }
 ];
 
-const project = [
-  {
-    icon: Building2,
-    image: "https://sc0.blr1.digitaloceanspaces.com/large/657281-e3b445bb-90b4-46e3-ae48-69716adff81a.jpg",
-    title: "Project Management Consulting",
-    description: "Comprehensive project planning, execution, and monitoring to ensure your projects are delivered on time, within scope, and on budget. Our consultants apply proven frameworks like Agile, PRINCE2, and PMBOK.",
-    largeDescription: "We offer end-to-end project management consulting using globally accepted methodologies like PMBOK, Agile, and PRINCE2. Our services include project scoping, scheduling, risk management, resource planning, stakeholder coordination, and monitoring & evaluation. We ensure transparency, accountability, and performance across every project stage.",
-    keyword: "project-management-consulting"
-  },
-  {
-    icon: Building2,
-    image: "https://media.gettyimages.com/id/1198193345/photo/proud-indian-ceo-posing-with-smiling-company-staff-in-office.jpg?s=612x612&w=gi&k=20&c=FW3PnsR_r2oU_0XsXnwj0Q8v9Yjk49NChXgWL5DMruc=",
-    title: "CRF Funding Assistance",
-    description: "Expert guidance in applying for Central Road Fund (CRF) financing. We help you prepare proposals, ensure compliance with government norms, and streamline the disbursement process.",
-    largeDescription: "We support infrastructure development organizations in accessing Central Road Fund (CRF) financing. From feasibility reports and proposal preparation to regulatory compliance and follow-up with ministries, our team ensures smooth navigation of CRF guidelines, boosting your project's chances of approval and timely fund release.",
-    keyword: "crf-funding-assistance"
-  },
-  {
-    icon: Building2,
-    image: "https://agiindia.com/wp-content/uploads/2020/09/Top-Five-Infrastructure-Projects-in-India.png",
-    title: "Government Tender Consulting",
-    description: "Stay ahead in the competitive bidding process. Our team identifies relevant tenders, prepares accurate documentation, and improves your success rate in securing government projects.",
-    largeDescription: "Maximize your chances in public procurement with our expert tender consulting. We analyze tender opportunities, prepare essential technical and financial documents, coordinate site visits, and assist during pre-bid meetings. With a high win rate across infrastructure and social sector tenders, we are your trusted partner for public contracts.",
-    keyword: "government-tender-consulting"
-  },
-  {
-    icon: Building2,
-    image: "https://via.placeholder.com/100x100?text=NGO",
-    title: "NGO & Non-Profit Advisory",
-    description: "Supporting NGOs with strategy, funding applications, and regulatory compliance. We help build sustainable models that attract donors and drive long-term social impact.",
-    largeDescription: "From mission clarity and governance structuring to fundraising and donor communications, we offer holistic advisory services to NGOs. Our team helps set up operational frameworks, align activities with SDGs, and build transparent processes that enhance donor confidence and drive measurable change.",
-    keyword: "ngo-&-non-profit-advisory"
-  },
-  {
-    icon: Building2,
-    image: "https://via.placeholder.com/100x100?text=Strategy",
-    title: "Strategic Planning & Feasibility",
-    description: "From feasibility studies to strategic roadmaps, our consultancy helps organizations assess risks, explore opportunities, and define measurable goals to fuel growth and resilience.",
-    largeDescription: "We conduct in-depth feasibility assessments that examine technical, financial, and social viability of your initiatives. Our strategic planning team helps you build practical roadmaps, define KPIs, allocate resources effectively, and make data-informed decisions to scale with confidence and impact.",
-    keyword: "strategic-planning-&-feasibility"
-  },
-  {
-    icon: Building2,
-    image: "https://via.placeholder.com/100x100?text=Training",
-    title: "Capacity Building & Training",
-    description: "Tailored training programs for teams in project management, compliance, and operations. Equip your staff with the right tools and methodologies for efficient execution.",
-    largeDescription: "We design and deliver customized capacity-building programs across domains like monitoring & evaluation, CSR compliance, field operations, and communication. Our modules are interactive, practical, and led by experienced trainers to upskill your team and strengthen your organizational capacity.",
-    keyword: "capacity-building-&-training"
-  }
-];
-
 const impactStats = [
   {
     icon: CheckCircle2,
@@ -281,4 +233,241 @@ const impactData = [
   { amount: "₹5,000", text: "Building supplies for 1 school room" },
 ];
 
-export { steps, capabilities, services, impactStats, impactData, statsData, project };
+
+
+
+const projects = [
+  {
+    icon: Sprout,
+    image: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800",
+    title: "Shatavari Plantation & Distribution",
+    description: "Government-supported cultivation and distribution of 1,00,000 Shatavari plants under NMPB AYUSH scheme for NGOs, farmers, and rural communities.",
+    keyword: "shatavari-plantation",
+    fullDetails: {
+      introduction: "The Ministry of AYUSH under the National Medicinal Plant Board (NMPB) has launched the Central Sector Scheme for Conservation, Development, and Sustainable Management of Medicinal Plants. This scheme offers funding and government support for Shatavari Plantation & Distribution Project.",
+      sections: [
+        {
+          title: "What is Shatavari Plantation Project?",
+          content: [
+            "The government supports the cultivation and distribution of 1,00,000 Shatavari plants to NGOs, farmers, SHGs, Panchayats, Schools, Ayurvedic institutions, and rural communities under the NMPB AYUSH scheme."
+          ]
+        },
+        {
+          title: "Why Shatavari Cultivation?",
+          content: [
+            "Top Ayurvedic medicinal plant for women's health, fertility, and immunity",
+            "High demand in Ayurvedic medicines, nutraceuticals, and herbal pharmaceutical companies",
+            "Profitable option for rural farmers and tribal communities"
+          ]
+        },
+        {
+          title: "Project Budget",
+          content: [
+            "The Shatavari Plantation Project is designed to run over a period of three years.",
+            "Total project cost: ₹18,00,000 (covers plantation activities, training, monitoring, and management)",
+            "Miscellaneous cost: ₹90,000 (5% for unforeseen expenses)",
+            "Overall budget required: ₹18,90,000"
+          ]
+        },
+        {
+          title: "Implementation Process",
+          content: [
+            "Online Registration & Empanelment on AYUSH–NMPB Portal",
+            "DPR (Project Report) Preparation including land details, map, plantation layout",
+            "Submission to State Medicinal Plant Board (SMPB) for review",
+            "Forwarding to National Medicinal Plant Board (NMPB) for central approval",
+            "Evaluation by Project Screening Committee (PSC) and Standing Finance Committee (SFC)",
+            "Project Implementation and plantation begins",
+            "Monitoring & Online Reporting with photos and progress updates"
+          ]
+        }
+      ],
+      benefits: [
+        "Government funding support of ₹18,90,000",
+        "Promotes herbal farming and rural employment",
+        "Supports women's health initiatives",
+        "Creates sustainable income for farmers",
+        "Contributes to India's medicinal plant mission"
+      ],
+      eligibility: [
+        "NGOs, Trusts, Farmer Producer Companies (FPCs)",
+        "Schools, Colleges, Ayurvedic Universities",
+        "Panchayat Samitis, Gram Sabhas, Women SHGs",
+        "CSR Foundations & Herbal Training Institutes"
+      ],
+      support: [
+        "DPR Preparation & Budget Planning",
+        "AYUSH–NMPB Portal Registration & Empanelment",
+        "Proposal Submission to SMPB & NMPB",
+        "Documentation, Approval & Fund Assistance",
+        "Implementation Support – Plantation & Reporting",
+        "Awareness Programmes for Farmers & Communities"
+      ]
+    }
+  },
+  {
+    icon: School,
+    image: "https://images.unsplash.com/photo-1622383563227-04401ab4e5ea?w=800",
+    title: "School Herbal Garden (500 sq. m.)",
+    description: "Establishment of Aushadh Vatika in schools with 10-15 Ayurvedic plants like Shatavari, Tulsi, Giloy, Brahmi to promote herbal education among students.",
+    keyword: "school-herbal-garden",
+    fullDetails: {
+      introduction: "To promote Ayurvedic medicinal plants awareness and education, the government supports the setup of Herbal Gardens (Aushadh Vatika) in educational institutions under the NMPB AYUSH scheme.",
+      sections: [
+        {
+          title: "Project Overview",
+          content: [
+            "Plantation of 10–15 Ayurvedic medicinal plants including Shatavari, Tulsi, Giloy, Brahmi, Neem, Aloe Vera",
+            "Students learn about Ayurveda, plant-based healing, and herbal farming",
+            "Creates awareness about traditional medicine and sustainable practices"
+          ]
+        },
+        {
+          title: "Financial Assistance",
+          content: [
+            "₹25,000 for establishment (Year 1)",
+            "₹7,000 per year for maintenance (Next 4 years)",
+            "Total support over 5 years: ₹53,000"
+          ]
+        },
+        {
+          title: "Garden Components",
+          content: [
+            "Plant beds with variety of medicinal plants",
+            "Irrigation system for proper water management",
+            "Signboards with plant information and benefits",
+            "Walking paths for student access",
+            "Educational materials and documentation"
+          ]
+        },
+        {
+          title: "Implementation Steps",
+          content: [
+            "School registration on AYUSH–NMPB Portal",
+            "Site selection and layout planning (500 sq. m.)",
+            "DPR preparation with plant list and budget",
+            "SMPB and NMPB approval process",
+            "Garden establishment with plant procurement",
+            "Training for teachers and students",
+            "Regular maintenance and monitoring"
+          ]
+        }
+      ],
+      benefits: [
+        "Hands-on learning about Ayurvedic plants",
+        "Environmental education and awareness",
+        "Promotes sustainable agriculture practices",
+        "Creates green spaces in educational institutions",
+        "Government financial support for 5 years"
+      ],
+      eligibility: [
+        "Government and Private Schools",
+        "Educational Institutions with available land",
+        "Schools committed to environmental education",
+        "Institutions with basic maintenance capabilities"
+      ],
+      support: [
+        "Garden layout design and planning",
+        "Plant selection and procurement guidance",
+        "DPR preparation for NMPB approval",
+        "Training for teachers and maintenance staff",
+        "Documentation and reporting assistance",
+        "Ongoing technical support"
+      ]
+    }
+  },
+  {
+    icon: Building2,
+    image: "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=800",
+    title: "Institutional AYUSH Van (Per Hectare)",
+    description: "Development of comprehensive herbal gardens in universities, hospitals, and public spaces with complete infrastructure including pathways and documentation.",
+    keyword: "institutional-ayush-van",
+    fullDetails: {
+      introduction: "The Institutional AYUSH Van project supports the establishment of comprehensive herbal gardens in Universities, AYUSH Colleges, Hospitals, Panchayat Lands, and Public Parks. This initiative creates large-scale medicinal plant gardens with complete infrastructure and documentation.",
+      sections: [
+        {
+          title: "Project Scope",
+          content: [
+            "Set up in Universities, AYUSH Colleges, Hospitals, Panchayat Lands, Public Parks",
+            "Includes pathways, plant beds, irrigation system, signboards, and comprehensive documentation",
+            "Showcases wide variety of medicinal plants with educational information",
+            "Creates research and conservation hubs for medicinal plants"
+          ]
+        },
+        {
+          title: "Financial Assistance",
+          content: [
+            "₹3,00,000 per hectare for establishment (Year 1)",
+            "₹60,000 per hectare per year for maintenance (Next 4 years)",
+            "Total support over 5 years: ₹5,40,000 per hectare"
+          ]
+        },
+        {
+          title: "Infrastructure Components",
+          content: [
+            "Organized plant beds with taxonomic arrangement",
+            "Walking pathways for visitors and researchers",
+            "Drip irrigation or sprinkler system",
+            "Informational signboards for each plant species",
+            "Seating areas and viewing platforms",
+            "Boundary fencing and security measures",
+            "Documentation center with plant database"
+          ]
+        },
+        {
+          title: "Implementation Process",
+          content: [
+            "Institution registration and empanelment",
+            "Land identification and survey (minimum 1 hectare)",
+            "Detailed layout design and plant species selection",
+            "DPR preparation with cost estimates",
+            "State and national level approvals",
+            "Infrastructure development and plant procurement",
+            "Garden establishment and documentation",
+            "Regular monitoring and public access management"
+          ]
+        }
+      ],
+      benefits: [
+        "Creates center for medicinal plant research",
+        "Public education and awareness platform",
+        "Conservation of rare and endangered species",
+        "Resource for Ayurvedic students and practitioners",
+        "Substantial government funding support",
+        "Long-term maintenance assistance"
+      ],
+      eligibility: [
+        "Universities and Ayurvedic Colleges",
+        "Government and Private Hospitals",
+        "Panchayat Bodies with available land",
+        "Public Parks and Botanical Gardens",
+        "Research Institutes focusing on medicinal plants",
+        "CSR Organizations with land availability"
+      ],
+      support: [
+        "Complete DPR preparation and planning",
+        "Landscape design and infrastructure planning",
+        "Plant species selection and sourcing",
+        "AYUSH-NMPB portal documentation",
+        "Approval process facilitation",
+        "Implementation monitoring and support",
+        "Training for maintenance staff",
+        "Digital documentation systems"
+      ]
+    }
+  }
+];
+
+const projectsOverview = {
+  mainTitle: "Our Work",
+  mainDescription: "Supporting Ayurveda promotion, medicinal plant awareness, and sustainable rural development through government-backed initiatives under the National Medicinal Plant Board (NMPB).",
+  schemes: [
+    "Central Sector Scheme – Ministry of AYUSH",
+    "National Medicinal Plant Board (NMPB) supported",
+    "Complete funding and government support",
+    "For NGOs, Farmers, Schools, Ayurvedic Institutes & CSR Organisations"
+  ]
+};
+
+
+export { steps, capabilities, services, impactStats, impactData, statsData, projects, projectsOverview };

@@ -20,7 +20,7 @@ const ServiceSection = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => {
             const Icon = service.icon;
             const isHovered = hoveredIndex === index;
@@ -33,15 +33,13 @@ const ServiceSection = () => {
                 className="relative overflow-hidden group cursor-pointer h-70"
                 onClick={() => navigate(`/api/services/${service.keyword}`)}
               >
-                {/* Image with grayscale filter */}
+                {/* Image (always in color, no grayscale) */}
                 <div className="relative w-full h-full">
                   <img
                     src={service.image}
                     alt={service.title}
                     className={`w-full h-full object-cover transition-all duration-500 ${
-                      isHovered
-                        ? "grayscale-0 scale-110"
-                        : "grayscale scale-100"
+                      isHovered ? "scale-110" : "scale-100"
                     }`}
                   />
 
@@ -74,12 +72,12 @@ const ServiceSection = () => {
                       {service.title}
                     </h3>
                     <div
-                    className={`${
+                      className={`${
                         isHovered
                           ? "w-1/2 h-0.5 bg-yellow-500 mb-4"
                           : "w-12 h-0.5 bg-white mb-4"
                       }`}
-                      />
+                    />
 
                     {/* Description appears on hover */}
                     <div
