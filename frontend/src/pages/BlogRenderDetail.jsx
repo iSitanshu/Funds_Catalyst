@@ -116,7 +116,7 @@ const BlogRenderDetail = () => {
       <div className="flex justify-start mt-8">
         <Button
           variant="ghost"
-          onClick={() => navigate("/blogs")}
+          onClick={() => navigate("/")}
           className="flex items-center gap-2 text-yellow-600 hover:text-yellow-700"
         >
           <ArrowLeft className="w-4 h-4" />

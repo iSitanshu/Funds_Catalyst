@@ -22,13 +22,15 @@ const navigate = useNavigate()
 
       {/* Content */}
       <div className="container mx-auto px-4 z-10 text-center">
-        <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold text-primary-foreground mb-6 leading-tight max-w-1xl mx-auto">
-          Your Bridge to Government & CSR Support
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6 leading-tight max-w-5xl mx-auto">
+          NGO Consultancy, CSR Funding & Government Tender Support in India
         </h1>
         
         <p className="text-lg md:text-xl text-primary-foreground/90 mb-10 max-w-4xl mx-auto leading-relaxed">
-          Government Project Sanctioning Made Easy for <span className="font-bold text-accent">NGOs</span>, <span className="font-bold text-accent">Startups</span>,  
-          and <span className="font-bold text-accent">Corporate Organizations</span>
+          Your Strategic Partner for <span className="font-bold text-accent">Compliance</span>, 
+          Sustainable <span className="font-bold text-accent">Fundraising</span>, 
+          Expert <span className="font-bold text-accent">DPR Writing</span>, 
+          and End-to-End <span className="font-bold text-accent">Project Execution</span>
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -64,7 +66,7 @@ const navigate = useNavigate()
             <div className="text-sm md:text-base opacity-90">Professionals</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold text-accent">19</div>
+            <div className="text-3xl md:text-4xl font-bold text-accent">25</div>
             <div className="text-sm md:text-base opacity-90">States Served</div>
           </div>
         </div>

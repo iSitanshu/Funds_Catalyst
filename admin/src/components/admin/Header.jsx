@@ -1,11 +1,23 @@
 import { Search, Moon, Sun, LogOut } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-// import { cn } from "../../lib/utils";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export function Header() {
+  const navigate = useNavigate(); // useNavigate hook
   const [darkMode, setDarkMode] = useState(false);
+  const admintoken = useSelector((state) => state.admin.admintoken)
+  const adminInfo = useSelector((state) => state.admin.adminInfo);
+
+  useEffect(() => {
+    if(!admintoken) {
+      navigate('/sign-in')
+      return;
+    }
+  }, [admintoken, navigate])
+  
 
   const toggleTheme = () => {
     setDarkMode(!darkMode);
@@ -13,7 +25,7 @@ export function Header() {
   };
 
   return (
-    <header className="bg-card border-b border-border sticky top-0 z-10 backdrop-blur-sm bg-card/95">
+    <header className="border-b border-border sticky top-0 z-10 backdrop-blur-sm bg-card/95">
       <div className="flex items-center justify-between px-6 py-4">
         <div className="flex items-center gap-4 flex-1">
           <div className="relative max-w-md w-full">
@@ -40,13 +52,20 @@ export function Header() {
 
           <div className="flex items-center gap-3">
             <div className="text-sm">
-              <p className="font-medium">Admin User</p>
-              <p className="text-xs text-muted-foreground">admin@example.com</p>
+              <p className="font-medium">{adminInfo?.username || "Admin User"}</p>
+              <p className="text-xs text-muted-foreground">
+                {adminInfo?.email || "admin@example.com"}
+              </p>
             </div>
             <Button
               variant="ghost"
               size="icon"
               className="hover:bg-destructive/10 hover:text-destructive"
+              onClick={() => {
+                localStorage.removeItem("admintoken");
+                localStorage.removeItem("adminInfo");
+                navigate("/sign-in");
+              }}
             >
               <LogOut className="h-5 w-5" />
             </Button>

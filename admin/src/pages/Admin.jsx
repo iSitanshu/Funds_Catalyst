@@ -1,16 +1,28 @@
+// src/pages/Admin.jsx
 import { useState } from "react";
-import { Sidebar } from "../components/admin/Sidebar"
-import { Header } from "../components/admin/Header"
-import {Dashboard} from "./admin/Dashboard";
-import {Newsletter} from "./admin/Newsletter";
-import {BlogManagement} from "./admin/BlogManagement";
-import {SendMail} from "./admin/SendMail";
-import {Consultancy} from "./admin/Consultancy";
-import {Network} from "./admin/Network"
+// import { useNavigate } from "react-router-dom";
+// import { useSelector } from "react-redux";
+import { Sidebar } from "../components/admin/Sidebar";
+import { Header } from "../components/admin/Header";
+import { Dashboard } from "./admin/Dashboard";
+import { Newsletter } from "./admin/Newsletter";
+import { BlogManagement } from "./admin/BlogManagement";
+import { SendMail } from "./admin/SendMail";
+import { Consultancy } from "./admin/Consultancy";
+import { Network } from "./admin/Network";
 
 const Admin = () => {
   const [currentPage, setCurrentPage] = useState("dashboard");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  // const navigate = useNavigate();
+  // const token = useSelector((state) => state.admin.admintoken);
+
+  // Secure page: redirect if no token
+  // useEffect(() => {
+  //   if (!token) {
+  //     navigate("/sign-in");
+  //   }
+  // }, [token, navigate]);
 
   const renderPage = () => {
     switch (currentPage) {
@@ -25,7 +37,7 @@ const Admin = () => {
       case "mail":
         return <SendMail />;
       case "network":
-        return <Network />
+        return <Network />;
       default:
         return <Dashboard />;
     }
@@ -41,9 +53,7 @@ const Admin = () => {
       />
       <div className="flex-1 flex flex-col">
         <Header />
-        <main className="flex-1 p-6 md:p-8 lg:p-10">
-          {renderPage()}
-        </main>
+        <main className="flex-1 p-6 md:p-8 lg:p-10">{renderPage()}</main>
       </div>
     </div>
   );

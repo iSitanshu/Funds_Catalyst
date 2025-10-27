@@ -41,7 +41,6 @@ router.post('/add_network', upload.single('image'), async (req, res) => {
   }
 });
 
-
 // fetch all the images 
 router.get('/fetch_network', async (req, res) => {
   const network_info = await prisma.network.findMany({
@@ -50,6 +49,10 @@ router.get('/fetch_network', async (req, res) => {
 
   if(!network_info) return res.status(404).json({ message: "Failed to Fetch try again"})
   return res.status(201).json({message: "Network Info Fetched successfully", network_info});
+})
+
+router.delete('/delete_network', async(req, res) => {
+
 })
 
 export default router;

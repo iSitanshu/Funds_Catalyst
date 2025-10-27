@@ -93,7 +93,7 @@ const ServicesRenderDetail = () => {
             {relatedArticles.map((item) => (
               <Card
                 key={item.keyword}
-                onClick={() => navigate(`/servicess/${item.keyword}`)}
+                onClick={() => navigate(`/api/services/${item.keyword}`)}
                 className="cursor-pointer group border border-gray-200 hover:border-yellow-400 hover:shadow-lg transition-all duration-300"
               >
                 <div className="overflow-hidden rounded-t-lg">

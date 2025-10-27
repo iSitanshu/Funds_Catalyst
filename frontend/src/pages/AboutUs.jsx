@@ -1,7 +1,8 @@
 import React from 'react'
 import { Building2, Target, Rocket, Users, Award, TrendingUp, CheckCircle, Briefcase, Lightbulb, Shield, Home } from 'lucide-react'
 import WhyChooseSection from '../components/WhyChooseSection'
-// import { useNavigate } from 'react-router-dom'
+import GalarySection from "../components/GalarySection.jsx"
+import UpdateSection from '@/components/UpdateSection'
 
 const AboutUs = () => {
   const stats = [
@@ -23,15 +24,7 @@ const AboutUs = () => {
       {/* Hero Section with Background Image */}
       <div className="relative h-[600px] overflow-hidden">
         {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: 'url(https://sc0.blr1.digitaloceanspaces.com/large/657281-e3b445bb-90b4-46e3-ae48-69716adff81a.jpg)'
-          }}
-        >
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-900/85 via-gray-800/80 to-yellow-900/70"></div>
-        </div>
+        <UpdateSection />
         
         <div className="relative max-w-7xl mx-auto px-6 h-full flex items-center">
           <div className="max-w-3xl">
@@ -156,6 +149,9 @@ const AboutUs = () => {
           </div>
         </div>
       </div>
+
+      {/* Galary View */}
+      <GalarySection />
 
       {/* Core Values Section */}
       <div className="max-w-7xl mx-auto px-6 py-20">

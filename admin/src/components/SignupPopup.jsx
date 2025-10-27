@@ -1,19 +1,15 @@
-// import { useRouter } from "next/navigation";
-// import axios from "axios";
 import { useState } from "react";
-// import { useAppDispatch } from "@/lib/hooks";
-// import { setUserEmail } from "@/lib/features/Infodetail/infoDetailSlice";
 import { Loader, X } from "lucide-react";
-import { useNavigate } from 'react-router-dom';
-// import { setCurrentUserToken } from "@/lib/features/currentToken/currentTokenSlice";
+import { useNavigate } from "react-router-dom";
 
 const SignupPopup = () => {
   const navigate = useNavigate();
   const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   const [userDetail, setUserDetail] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
   });
@@ -30,36 +26,37 @@ const SignupPopup = () => {
     );
   }
 
-  const handleSubmitSignup = async () => {
+  const handleSubmitSignup = async (e) => {
     e.preventDefault();
     setShowError(false);
+    setErrorMessage("");
+    setLoading(true);
 
-    // try {
-    //   const response = await axios.post(
-    //     `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/initiate_signup`,
-    //     userDetail
-    //   );
+    try {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/admin_signup`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userDetail),
+      });
 
-    //   if (response.data.success) {
-    //     dispatch(setUserEmail(userDetail.email));
-    //     localStorage.setItem('token', response.data.token);
-    //     dispatch(setCurrentUserToken(response.data.token))
-    //     setTimeout(() => {
-    //       router.push("/", { scroll: false });
-    //     }, 100);
-    //   } else {
-    //     setShowError(true);
-    //   }
-    // } catch (error) {
-    //   if (axios.isAxiosError(error) && error.response?.status === 429) {
-    //     router.push("/api/chill-out");
-    //     return; // ⛔ prevent further execution
-    //   }
-    //   console.error("Signup error:", error);
-    //   setShowError(true);
-    // } finally {
-    //   setLoading(false);
-    // }
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+
+        setTimeout(() => {
+          navigate("/sign-in"); // redirect after signup success
+        }, 500);
+      } else {
+        setShowError(true);
+        setErrorMessage(data.message || "Signup failed. Try again.");
+      }
+    } catch (err) {
+      console.error("Signup error:", err);
+      setShowError(true);
+      setErrorMessage("An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -70,26 +67,24 @@ const SignupPopup = () => {
       >
         {/* Title */}
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-semibold text-gray-800">Sign up</h2>
-          <X className="cursor-pointer" onClick={() => navigate('/')}/>
+          <h2 className="text-2xl font-semibold text-gray-800">Admin Sign Up</h2>
+          <X className="cursor-pointer" onClick={() => navigate("/")} />
         </div>
 
         {/* Inputs */}
         <div className="flex flex-col gap-4 mb-4">
           {showError && (
-            <p className="text-red-600 text-sm">
-              Account Already exit. Try Login
-            </p>
+            <p className="text-red-600 text-sm">{errorMessage}</p>
           )}
 
           <input
             type="text"
-            name="name"
-            placeholder="Your name"
+            name="username"
+            placeholder="Your Name"
             required
-            value={userDetail.name}
+            value={userDetail.username}
             onChange={(e) =>
-              setUserDetail({ ...userDetail, name: e.target.value })
+              setUserDetail({ ...userDetail, username: e.target.value })
             }
             className="border border-gray-300 text-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
@@ -109,7 +104,7 @@ const SignupPopup = () => {
           <input
             type="password"
             name="password"
-            placeholder="Enter the Password"
+            placeholder="Enter Password"
             required
             value={userDetail.password}
             onChange={(e) =>
@@ -124,21 +119,15 @@ const SignupPopup = () => {
           type="submit"
           className="w-full bg-yellow-300 text-gray-900 py-2 rounded-md font-semibold hover:bg-yellow-600 transition duration-300"
         >
-          Sign up
+          Sign Up
         </button>
-
-        {/* Terms and Conditions */}
-        {/* <div className="flex items-start mt-4 gap-2 text-sm text-gray-600">
-          <input type="checkbox" required className="mt-1" />
-          <p>By continuing, I agree to the terms of use & privacy policy.</p>
-        </div> */}
 
         {/* Switch Auth Mode */}
         <p className="mt-4 text-sm text-center text-gray-700">
           Already have an account?{" "}
           <span
             className="text-yellow-600 font-semibold cursor-pointer hover:underline"
-            onClick={() => navigate('/sign-in')}
+            onClick={() => navigate("/sign-in")}
           >
             Login here
           </span>

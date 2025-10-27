@@ -170,7 +170,7 @@ router.post('/admin_login', async (req, res) => {
         { expiresIn: "7d" }
     )
 
-    return res.status(200).json({ message: "Admin Login successful", success: true, token });
+    return res.status(200).json({ message: "Admin Login successful", success: true, token, existing_admin });
 })
 
 export default router;

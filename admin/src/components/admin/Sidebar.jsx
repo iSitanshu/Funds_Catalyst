@@ -21,6 +21,7 @@ export function Sidebar({ currentPage, onNavigate, collapsed, onToggleCollapse }
     >
       <div className="flex flex-col h-full">
         <div className="p-4 flex items-center justify-between border-b border-border">
+          <img src="../src/assets/logofunds.png" alt="" width={40} height={10}/>
           {!collapsed && (
             <h2 className="font-bold text-xl bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
               Admin Panel

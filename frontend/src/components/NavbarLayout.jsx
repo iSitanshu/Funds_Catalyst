@@ -40,7 +40,7 @@ const ministries = [
   },
 ];
 
-const NavbarLayout = ({ isOpen, onClose, isLoggedIn = false }) => {
+const NavbarLayout = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
   const [isAssociationOpen, setIsAssociationOpen] = useState(false);
 
@@ -97,7 +97,7 @@ const NavbarLayout = ({ isOpen, onClose, isLoggedIn = false }) => {
               <div className="flex items-center gap-3">
                 <Briefcase className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" />
                 <span className="font-medium text-foreground group-hover:text-primary transition-colors">
-                  Our Partners
+                  In Association With
                 </span>
               </div>
               <ChevronDown
