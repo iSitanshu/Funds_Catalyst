@@ -10,6 +10,7 @@ import NewsLetterSection from '../components/NewsLetterSection'
 import PartnerSection from '../components/PartnerSection'
 import TestimonialsSection from '../components/TestimonialSection'
 import ProjectSection from "../components/ProjectSection"
+import BlogSection from '@/components/BlogSection'
 
 const Home = () => {
   return (
@@ -19,6 +20,7 @@ const Home = () => {
       <ServiceSection />
       <ImpactSection />
       <ProjectSection />
+      <BlogSection />
       {/* <FrameworkSection /> */}
       <TestimonialsSection />
       <PartnerSection />

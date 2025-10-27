@@ -62,6 +62,30 @@ router.get("/fetch_blogs", async (req, res) => {
   }
 });
 
+router.get('/particular_blog', async (req, res) => {
+  try {
+    const blogId = req.query.blogId;
+
+    const particular_blog = await prisma.blog.findUnique({
+      where: {
+        id: blogId
+      }
+    })
+
+    res.status(200).json({
+      success: true,
+      message: "Particular fetched Blog",
+      particular_blog
+    })
+  } catch (error) {
+    console.error("Error fetching blogs:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+})
+
 router.patch('/edit_blog/:id', async (req, res) => {
   const { id: blogId } = req.params;
 

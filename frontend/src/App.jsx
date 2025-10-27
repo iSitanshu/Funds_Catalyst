@@ -8,8 +8,8 @@ import SignupPopup from "./pages/SignupPopup"
 // ✅ Import all pages
 import Home from "./pages/Home";
 // import PaymentButton from "./components/PaymentButton";
-import DonationPage from "./pages/DonatePage";
-import DonationSuccessfull from "./pages/DonationSuccessfull";
+// import DonationPage from "./pages/DonatePage";
+// import DonationSuccessfull from "./pages/DonationSuccessfull";
 import ConsultancyBooking from "./pages/ConsultancyBooking";
 import ViewallProject from "./pages/ViewallProject";
 import AboutUs from "./pages/AboutUs";
@@ -22,7 +22,7 @@ import ServicesRenderDetail from "./pages/ServicesRenderDetail";
 import ScrollToTop from "./components/ScrollToTop";
 import NotFound from "./pages/NotFound";
 import ProjectRenderDetail from "./pages/ProjectRenderDetail";
-import BlogSection from "./components/BlogSection";
+import BlogRenderDetail from "./pages/BlogRenderDetail";
 
 function App() {
   return (
@@ -49,7 +49,7 @@ function App() {
           <Route path="/api/projects" element={<ViewallProject />} />
           <Route path="/api/projects/:projectId" element={<ProjectRenderDetail />} />
           <Route path="/api/services/:serviceId" element={<ServicesRenderDetail />} />
-          <Route path="/api/blogs/:blogId" element={<BlogSection />} />
+          <Route path="/api/blogs/:blogId" element={<BlogRenderDetail />} />
            <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
