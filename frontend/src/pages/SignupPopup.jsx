@@ -1,11 +1,7 @@
-// import { useRouter } from "next/navigation";
-// import axios from "axios";
-import { useState } from "react";
-// import { useAppDispatch } from "@/lib/hooks";
-// import { setUserEmail } from "@/lib/features/Infodetail/infoDetailSlice";
+import React, { useState } from "react";
+import axios from "axios";
 import { Loader, X } from "lucide-react";
-import { useNavigate } from 'react-router-dom';
-// import { setCurrentUserToken } from "@/lib/features/currentToken/currentTokenSlice";
+import { useNavigate } from "react-router-dom";
 
 const SignupPopup = () => {
   const navigate = useNavigate();
@@ -13,10 +9,45 @@ const SignupPopup = () => {
   const [loading, setLoading] = useState(false);
 
   const [userDetail, setUserDetail] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
   });
+
+  // ✅ Handle input changes
+  const handleChange = (e) => {
+    setUserDetail({ ...userDetail, [e.target.name]: e.target.value });
+  };
+
+  // ✅ Handle signup submit
+  const handleSubmitSignup = async (e) => {
+    e.preventDefault();
+    setShowError(false);
+    setLoading(true);
+
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/auth/signup`,
+        userDetail
+      );
+
+      if (response.data.success) {
+        // ✅ Signup successful → redirect to login
+        navigate("/sign-in");
+      } else {
+        setShowError(true);
+      }
+    } catch (error) {
+      console.error("Signup error:", error);
+
+      // If user already exists or validation fails
+      if (error.response && error.response.status === 400) {
+        setShowError(true);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // ✅ Loading Screen
   if (loading) {
@@ -30,38 +61,6 @@ const SignupPopup = () => {
     );
   }
 
-  const handleSubmitSignup = async () => {
-    e.preventDefault();
-    setShowError(false);
-
-    // try {
-    //   const response = await axios.post(
-    //     `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/initiate_signup`,
-    //     userDetail
-    //   );
-
-    //   if (response.data.success) {
-    //     dispatch(setUserEmail(userDetail.email));
-    //     localStorage.setItem('token', response.data.token);
-    //     dispatch(setCurrentUserToken(response.data.token))
-    //     setTimeout(() => {
-    //       router.push("/", { scroll: false });
-    //     }, 100);
-    //   } else {
-    //     setShowError(true);
-    //   }
-    // } catch (error) {
-    //   if (axios.isAxiosError(error) && error.response?.status === 429) {
-    //     router.push("/api/chill-out");
-    //     return; // ⛔ prevent further execution
-    //   }
-    //   console.error("Signup error:", error);
-    //   setShowError(true);
-    // } finally {
-    //   setLoading(false);
-    // }
-  };
-
   return (
     <div className="fixed inset-0 flex flex-col gap-6 items-center justify-center bg-black bg-opacity-60 z-50">
       <form
@@ -71,26 +70,25 @@ const SignupPopup = () => {
         {/* Title */}
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-semibold text-gray-800">Sign up</h2>
-          <X className="cursor-pointer" onClick={() => navigate('/')}/>
+          <X className="cursor-pointer" onClick={() => navigate("/")} />
         </div>
+
+        {/* Error Message */}
+        {showError && (
+          <p className="text-red-600 text-sm mb-3">
+            Account already exists or invalid details. Try logging in.
+          </p>
+        )}
 
         {/* Inputs */}
         <div className="flex flex-col gap-4 mb-4">
-          {showError && (
-            <p className="text-red-600 text-sm">
-              Account Already exit. Try Login
-            </p>
-          )}
-
           <input
             type="text"
-            name="name"
-            placeholder="Your name"
+            name="username"
+            placeholder="Your Name"
             required
-            value={userDetail.name}
-            onChange={(e) =>
-              setUserDetail({ ...userDetail, name: e.target.value })
-            }
+            value={userDetail.username}
+            onChange={handleChange}
             className="border border-gray-300 text-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
 
@@ -100,21 +98,17 @@ const SignupPopup = () => {
             placeholder="Your Email"
             required
             value={userDetail.email}
-            onChange={(e) =>
-              setUserDetail({ ...userDetail, email: e.target.value })
-            }
+            onChange={handleChange}
             className="border border-gray-300 text-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
 
           <input
             type="password"
             name="password"
-            placeholder="Enter the Password"
+            placeholder="Enter Password"
             required
             value={userDetail.password}
-            onChange={(e) =>
-              setUserDetail({ ...userDetail, password: e.target.value })
-            }
+            onChange={handleChange}
             className="border border-gray-300 text-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
@@ -127,18 +121,12 @@ const SignupPopup = () => {
           Sign up
         </button>
 
-        {/* Terms and Conditions */}
-        {/* <div className="flex items-start mt-4 gap-2 text-sm text-gray-600">
-          <input type="checkbox" required className="mt-1" />
-          <p>By continuing, I agree to the terms of use & privacy policy.</p>
-        </div> */}
-
         {/* Switch Auth Mode */}
         <p className="mt-4 text-sm text-center text-gray-700">
           Already have an account?{" "}
           <span
             className="text-yellow-600 font-semibold cursor-pointer hover:underline"
-            onClick={() => navigate('/sign-in')}
+            onClick={() => navigate("/sign-in")}
           >
             Login here
           </span>

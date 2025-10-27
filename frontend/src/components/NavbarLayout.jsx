@@ -11,7 +11,17 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { ChevronDown, ExternalLink, LogIn, Mail, Info, Briefcase } from "lucide-react";
+import {
+  ChevronDown,
+  ExternalLink,
+  LogIn,
+  LogOut,
+  Mail,
+  Info,
+  Briefcase,
+} from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { clearuserData } from "@/features/user/userSlice";
 
 const ministries = [
   {
@@ -42,16 +52,21 @@ const ministries = [
 
 const NavbarLayout = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  // ✅ Redux selector to get token
+  const usertoken = useSelector((state) => state.user.usertoken);
+
   const [isAssociationOpen, setIsAssociationOpen] = useState(false);
 
   const handleNavigation = (path) => {
-    if (path.startsWith('/#')) {
+    if (path.startsWith("/#")) {
       onClose();
       const section = path.substring(2);
       setTimeout(() => {
         const element = document.getElementById(section);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+          element.scrollIntoView({ behavior: "smooth" });
         }
       }, 100);
     } else {
@@ -61,13 +76,22 @@ const NavbarLayout = ({ isOpen, onClose }) => {
   };
 
   const handleExternalLink = (url) => {
-    window.open(url, '_blank', 'noopener,noreferrer');
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
+
+  // ✅ Logout handler
+  const handleLogout = () => {
+    dispatch(clearuserData());
+    localStorage.removeItem("usertoken");
+    localStorage.removeItem("userInfo");
+    onClose();
+    navigate("/");
   };
 
   return (
     <Sheet open={isOpen} onOpenChange={onClose}>
-      <SheetContent 
-        side="right" 
+      <SheetContent
+        side="right"
         className="w-[380px] sm:w-[440px] bg-white border-l-4 border-primary overflow-y-auto"
       >
         <SheetHeader className="border-b border-secondary pb-4 mb-6">
@@ -77,16 +101,28 @@ const NavbarLayout = ({ isOpen, onClose }) => {
         </SheetHeader>
 
         <nav className="flex flex-col gap-1">
-          {/* Login/Signup */}
-          <button
-            onClick={() => handleNavigation('/sign-in')}
-            className="flex items-center gap-3 px-4 py-3 rounded-lg text-left hover:bg-secondary transition-all duration-300 group"
-          >
-            <LogIn className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" />
-            <span className="font-medium text-foreground group-hover:text-primary transition-colors">
-              Login / Signup
-            </span>
-          </button>
+          {/* ✅ Login or Logout Toggle */}
+          {!usertoken ? (
+            <button
+              onClick={() => handleNavigation("/sign-in")}
+              className="flex items-center gap-3 px-4 py-3 rounded-lg text-left hover:bg-secondary transition-all duration-300 group"
+            >
+              <LogIn className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" />
+              <span className="font-medium text-foreground group-hover:text-primary transition-colors">
+                Login / Signup
+              </span>
+            </button>
+          ) : (
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-3 px-4 py-3 rounded-lg text-left hover:bg-destructive/10 transition-all duration-300 group"
+            >
+              <LogOut className="w-5 h-5 text-destructive group-hover:scale-110 transition-transform" />
+              <span className="font-medium text-destructive group-hover:text-destructive/80 transition-colors">
+                Logout
+              </span>
+            </button>
+          )}
 
           {/* In Association With */}
           <Collapsible
@@ -102,7 +138,7 @@ const NavbarLayout = ({ isOpen, onClose }) => {
               </div>
               <ChevronDown
                 className={`w-5 h-5 text-primary transition-transform duration-300 ${
-                  isAssociationOpen ? 'rotate-180' : ''
+                  isAssociationOpen ? "rotate-180" : ""
                 }`}
               />
             </CollapsibleTrigger>
@@ -127,7 +163,7 @@ const NavbarLayout = ({ isOpen, onClose }) => {
 
           {/* About */}
           <button
-            onClick={() => handleNavigation('/api/about-us')}
+            onClick={() => handleNavigation("/api/about-us")}
             className="flex items-center gap-3 px-4 py-3 rounded-lg text-left hover:bg-secondary transition-all duration-300 group"
           >
             <Info className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" />
@@ -138,7 +174,7 @@ const NavbarLayout = ({ isOpen, onClose }) => {
 
           {/* Contact Us */}
           <button
-            onClick={() => handleNavigation('/api/contact-us')}
+            onClick={() => handleNavigation("/api/contact-us")}
             className="flex items-center gap-3 px-4 py-3 rounded-lg text-left hover:bg-secondary transition-all duration-300 group"
           >
             <Mail className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" />
@@ -149,7 +185,7 @@ const NavbarLayout = ({ isOpen, onClose }) => {
 
           {/* Services */}
           <button
-            onClick={() => handleNavigation('/#services')}
+            onClick={() => handleNavigation("/#services")}
             className="flex items-center gap-3 px-4 py-3 rounded-lg text-left hover:bg-secondary transition-all duration-300 group"
           >
             <Briefcase className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" />

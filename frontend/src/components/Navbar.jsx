@@ -1,13 +1,16 @@
 import React, { useState } from "react";
-import { Heart, Menu, X } from 'lucide-react';
+import { Heart, Menu, X, User } from "lucide-react"; // Added User icon
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux"; // ✅ import Redux hook
 import NavbarLayout from "./NavbarLayout";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // TODO: Replace with actual auth state
-  const isLoggedIn = false; // This should come from your auth context/state
+
+  // ✅ Get login state from Redux
+  const usertoken = useSelector((state) => state?.user?.usertoken ?? null);
+  const isLoggedIn = !!usertoken; // true if token exists
 
   return (
     <>
@@ -22,10 +25,20 @@ const Navbar = () => {
           Fund Catalyst
         </div>      
 
-        {/* Right side: Donate button and Hamburger */}
+        {/* Right side: Donate/Profile and Hamburger */}
         <div className="flex items-center gap-4">
           
-          {/* Donate Button */}
+          {/* Profile Icon if logged in */}
+          {isLoggedIn && (
+            <button
+              className="p-2 hover:bg-white/10 rounded-full transition-all duration-300"
+              aria-label="Profile"
+            >
+              <User className="text-white" size={24} />
+            </button>
+          )}
+
+          {/* Donate Button (optional) */}
           {/* <button
             className="flex items-center gap-2 bg-white text-primary font-semibold px-5 py-2.5 rounded-full cursor-pointer shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
             onClick={() => navigate('/api/donate')}
@@ -53,7 +66,7 @@ const Navbar = () => {
       <NavbarLayout 
         isOpen={isMenuOpen} 
         onClose={() => setIsMenuOpen(false)}
-        isLoggedIn={isLoggedIn}
+        isLoggedIn={isLoggedIn} // pass login state to NavbarLayout
       />
     </>
   );
