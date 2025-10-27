@@ -1,10 +1,9 @@
 import React from 'react'
 import { Building2, Target, Rocket, Users, Award, TrendingUp, CheckCircle, Briefcase, Lightbulb, Shield, Home } from 'lucide-react'
 import WhyChooseSection from '../components/WhyChooseSection'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 
 const AboutUs = () => {
-  const navigate = useNavigate();
   const stats = [
     { number: "500+", label: "Projects Delivered", icon: Briefcase },
     { number: "200+", label: "Happy Clients", icon: Users },
