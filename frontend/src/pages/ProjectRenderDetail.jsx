@@ -226,7 +226,7 @@ const ProjectRenderDetail = () => {
                   <Card
                     key={item.keyword}
                     className="cursor-pointer group overflow-hidden border-border bg-card hover:shadow-xl hover:-translate-y-1 transition-all duration-300 rounded-lg"
-                    onClick={() => navigate(`/project/${item.keyword}`)}
+                    onClick={() => navigate(`/api/projects/${item.keyword}`)}
                   >
                     <div className="w-full h-52 overflow-hidden relative">
                       <img

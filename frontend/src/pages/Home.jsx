@@ -11,6 +11,7 @@ import PartnerSection from '../components/PartnerSection'
 import TestimonialsSection from '../components/TestimonialSection'
 import ProjectSection from "../components/ProjectSection"
 import BlogSection from '@/components/BlogSection'
+import Whatsapp from '@/components/Whatsapp'
 
 const Home = () => {
   return (
@@ -27,6 +28,7 @@ const Home = () => {
       <WhyChooseSection />
       <ContactSection />
       <NewsLetterSection />
+	<Whatsapp />
     </div>
   )
 }

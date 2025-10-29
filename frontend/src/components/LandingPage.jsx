@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import { ArrowRight } from "lucide-react";
+import { background_for_header } from "@/assets/assets";
 
 const LandingPage = () => {
   const scrollToSection = (id) => {
@@ -13,7 +14,7 @@ const navigate = useNavigate()
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="./src/assets/background_for_header.jpeg"
+          src={background_for_header}
           alt="Professional team collaboration" 
           className="w-full h-full object-cover"
         />
@@ -22,7 +23,8 @@ const navigate = useNavigate()
 
       {/* Content */}
       <div className="container mx-auto px-4 z-10 text-center">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6 leading-tight max-w-5xl mx-auto">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6 leading-tight max-w-5xl mx-auto"
+        style={{ fontFamily: " 'Times New Roman', serif" }}>
           NGO Consultancy, CSR Funding & Government Tender Support in India
         </h1>
         

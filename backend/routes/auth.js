@@ -173,4 +173,56 @@ router.post('/admin_login', async (req, res) => {
     return res.status(200).json({ message: "Admin Login successful", success: true, token, existing_admin });
 })
 
+router.post("/add_in_email_list", async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email || !email.includes("@")) {
+      return res.status(400).json({ error: "Valid email is required" });
+    }
+
+    const newEntry = await prisma.specificEmailList.create({
+      data: { email },
+    });
+
+    return res.status(201).json({
+      message: "Email added successfully!",
+      data: newEntry,
+    });
+  } catch (error) {
+    if (error.code === "P2002") {
+      return res.status(409).json({ error: "Email already exists" });
+    }
+
+    console.error("Error adding email:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+router.delete("/delete_email", async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email || !email.includes("@")) {
+      return res.status(400).json({ error: "Valid email is required" });
+    }
+
+    const deleted = await prisma.specificEmailList.delete({
+      where: { email },
+    });
+
+    return res.status(200).json({
+      message: "Email deleted successfully",
+      data: deleted,
+    });
+  } catch (error) {
+    if (error.code === "P2025") {
+      return res.status(404).json({ error: "Email not found" });
+    }
+
+    console.error("Error deleting email:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 export default router;

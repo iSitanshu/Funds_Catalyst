@@ -2,6 +2,7 @@ import React from 'react'
 import { Building2, Target, Rocket, Users, Award, TrendingUp, CheckCircle, Briefcase, Lightbulb, Shield, Home } from 'lucide-react'
 import WhyChooseSection from '../components/WhyChooseSection'
 import GalarySection from "../components/GalarySection.jsx"
+import { Roadmap } from '@/assets/assets'
 import UpdateSection from '@/components/UpdateSection'
 
 const AboutUs = () => {
@@ -73,7 +74,7 @@ const AboutUs = () => {
               At Funds Catalyst, we are committed to building bridges between purpose and execution. From grassroots NGOs to established corporations, we empower organizations through expert consulting in project design, policy compliance, government scheme access, CSR collaboration, and capacity development.
             </p>
             <p className="text-lg text-gray-700 leading-relaxed mb-8">
-              Our multidisciplinary team brings decades of combined experience in development consulting, corporate social responsibility, government affairs, and project managementâ€”ensuring every engagement delivers measurable impact.
+              Our multidisciplinary team brings decades of combined experience in development consulting, corporate social responsibility, government affairs, and project management¿ensuring every engagement delivers measurable impact.
             </p>
             <div className="flex items-center gap-4">
               <Building2 className="w-12 h-12 text-yellow-500" />
@@ -126,7 +127,7 @@ const AboutUs = () => {
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Mission</h3>
               <p className="text-gray-700 leading-relaxed mb-4">
-                To catalyze impactful change by empowering NGOs, companies, and public institutions through strategic consulting, policy expertise, and project implementation supportâ€”bridging the gap between vision and execution.
+                To catalyze impactful change by empowering NGOs, companies, and public institutions through strategic consulting, policy expertise, and project implementation support¿bridging the gap between vision and execution.
               </p>
               <p className="text-gray-700 leading-relaxed">
                 We strive to offer customized, ethical, and scalable solutions that address real-world challenges across diverse sectors.
@@ -195,7 +196,7 @@ const AboutUs = () => {
           </div>
           <div className="bg-white rounded-lg p-8 shadow-2xl">
             <img 
-              src="./../src/assets/Roadmap.webp" 
+              src={Roadmap}
               alt="Roadmap Funds Catalyst" 
               className="w-full lg:w-3/4 mx-auto rounded-lg"
             />

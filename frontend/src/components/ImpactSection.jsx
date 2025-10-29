@@ -9,15 +9,7 @@ const ImpactSection = () => {
   ];
 
   return (
-    <section
-      className="py-12 relative"
-      style={{
-        backgroundImage:
-          "url('https://img.freepik.com/premium-photo/yellow-background-simple-design-backdrop-banners-posters-covers-various-design-works_7954-64360.jpg?semt=ais_hybrid&w=740&q=80')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
+    <section className="py-12 relative bg-black/90 backdrop-blur-md shadow-lg">
       {/* dark overlay for better contrast */}
       <div className="absolute inset-0 bg-black/10" />
       <div className="container mx-auto px-4 relative z-10">
