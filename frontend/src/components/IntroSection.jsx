@@ -1,6 +1,7 @@
 
 import { CheckCircle } from "lucide-react";
 import { capabilities } from "./../content.js";
+import { meeting_about } from '@/assets/assets.js'
 
 const IntroSection = () => {
   return (
@@ -10,7 +11,7 @@ const IntroSection = () => {
           {/* Image */}
           <div className="relative">
             <img
-              src="./src/assets/meeting_about.jpeg"
+              src={meeting_about}
               alt="Funds Catalyst team in strategic meeting"
               className="rounded-lg shadow-2xl w-full h-auto"
             />
