@@ -140,4 +140,4 @@ npm run dev
 
 ## 📞 Contact
 
-For any inquiries or support, please contact us at [your-email@example.com](mailto:your-email@example.com).
+For any inquiries or support, please contact us at [Sitanshumishra18@gmail.com](mailto:your-email@example.com).
